@@ -1,0 +1,3 @@
+{
+  "extends": ["oclif", "oclif-typescript", "@jhasuraj01/eslint-config"]
+}

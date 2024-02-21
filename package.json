@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json.schemastore.org/package.json",
+  "name": "monorepo",
+  "version": "0.0.0",
+  "description": "monorepo template",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "nx affected -t build",
+    "build:all": "nx run-many -t build",
+    "build:cli": "nx build cli-app",
+    "clear": "nx run-many -t clear",
+    "clear:all": "nx run-many -t clear:all && rimraf .nx pnpm-lock.* node_modules",
+    "dev": "pnpm build && pnpm --recursive --parallel --stream run dev",
+    "format": "nx affected -t format",
+    "format:all": "nx run-many -t format",
+    "format:check": "nx affected -t format:check",
+    "format:check:all": "nx run-many -t format:check",
+    "graph": "nx graph",
+    "lint": "nx affected -t lint",
+    "lint:all": "nx run-many -t lint",
+    "lint:check": "nx affected -t lint:check",
+    "lint:check:all": "nx run-many -t lint:check",
+    "migrate": "nx migrate latest",
+    "preinstall": "npx only-allow pnpm",
+    "prepare": "husky",
+    "test": "nx affected -t test",
+    "test:all": "nx run-many -t test",
+    "test:config": "chmod +x test-config.sh && sh test-config.sh",
+    "update:packages": "pnpm update --recursive"
+  },
+  "keywords": [],
+  "author": {
+    "email": "contact@jhasuraj.com",
+    "name": "Suraj Jha",
+    "url": "https://jhasuraj.com"
+  },
+  "contributors": [],
+  "license": "MIT",
+  "engines": {
+    "node": "20.11.0",
+    "pnpm": "8.15.1"
+  },
+  "engineStrict": true,
+  "packageManager": "pnpm@8.15.1",
+  "devDependencies": {
+    "husky": "^9.0.11",
+    "nx": "18.0.4",
+    "rimraf": "^5.0.5"
+  }
+}

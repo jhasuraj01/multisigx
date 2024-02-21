@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "useUnknownInCatchVariables": true,
+    "alwaysStrict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    // "exactOptionalPropertyTypes": true, // oclif doesn't support this
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "allowUnusedLabels": false,
+    "allowUnreachableCode": false,
+
+    "resolvePackageJsonExports": true,
+    // "allowArbitraryExtensions": true,
+
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+
+    "forceConsistentCasingInFileNames": true,
+    "allowJs": false,
+    "noErrorTruncation": true,
+    "esModuleInterop": true,
+    
+    "target": "ESNext",
+    "moduleResolution": "Bundler",
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+
+    // "skipLibCheck": true,
+    "lib": [
+      "ESNext",
+      "DOM"
+    ],
+  },
+
+  "include": [ "src/**/*.ts" ],
+  "exclude": [ "node_modules", "dist" ]
+}

@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json.schemastore.org/package.json",
+  "name": "@jhasuraj01/tsup",
+  "version": "0.0.0",
+  "description": "Speaker speaks speech",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "node": "./dist/index.cjs",
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.mjs",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "preinstall": "npx only-allow pnpm",
+    "lint": "eslint ./src/**/* tsup.config.ts --ext .ts,js --fix",
+    "lint:check": "eslint ./src/**/* tsup.config.ts --ext .ts,js",
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "clear": "rimraf dist",
+    "clear:all": "rimraf dist node_modules"
+  },
+  "devDependencies": {
+    "@jhasuraj01/eslint-config": "workspace:*",
+    "@jhasuraj01/tsconfig": "workspace:*",
+    "rimraf": "^5.0.5",
+    "tsup": "^8.0.2",
+    "typescript": "^5.3.3"
+  },
+  "keywords": [],
+  "author": {
+    "email": "contact@jhasuraj.com",
+    "name": "Suraj Jha",
+    "url": "https://jhasuraj.com"
+  },
+  "contributors": [],
+  "license": "MIT",
+  "engines": {
+    "node": "20.11.0",
+    "pnpm": "8.15.1"
+  },
+  "engineStrict": true,
+  "packageManager": "pnpm@8.15.1",
+  "nx": {}
+}
