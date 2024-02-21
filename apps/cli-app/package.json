@@ -30,6 +30,7 @@
     "version": "oclif readme && git add README.md"
   },
   "dependencies": {
+    "@jhasuraj01/composer": "workspace:*",
     "@jhasuraj01/hello": "workspace:*",
     "@jhasuraj01/speak": "workspace:*",
     "@jhasuraj01/tsconfig": "workspace:*",
