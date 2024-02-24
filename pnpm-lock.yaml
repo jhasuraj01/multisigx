@@ -116,7 +116,7 @@ importers:
         specifier: workspace:*
         version: link:../eslint-config
       '@jhasuraj01/interface':
-        specifier: workspace:^
+        specifier: workspace:*
         version: link:../interface
       '@jhasuraj01/prettier-config':
         specifier: workspace:*
