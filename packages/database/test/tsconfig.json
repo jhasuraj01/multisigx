@@ -1,12 +1,12 @@
 {
   "extends": "../tsconfig",
   "compilerOptions": {
-    "rootDir": ".",
+    "rootDirs": ["../src", "../test"],
     "noEmit": true,
     "module": "ESNext",
     "moduleResolution": "Bundler",
   },
   "include": [
     "**/*.ts",
-  ],
+  ]
 }

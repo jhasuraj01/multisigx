@@ -9,7 +9,6 @@
   },
   "include": [
     "./src/**/*.ts",
-    "./src/stores/index.ts",
   ],
   "exclude": [
     "node_modules",
