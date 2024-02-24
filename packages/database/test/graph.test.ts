@@ -1,6 +1,6 @@
-import { describe, expect, test } from 'vitest'
-import { graphStorage } from '../src';
-import { GraphType } from 'src/stores';
+import type { GraphNodeType, GraphType } from '../src/stores'
+import { graphStorage } from '../src'
+import { describe, expect, expectTypeOf, test } from 'vitest'
 
 const graph: GraphType = {
   id: '1',
@@ -10,11 +10,12 @@ const graph: GraphType = {
       neighbors: []
     }
   ]
-}
+} as const
 
 describe('GraphStorage Tests', () => {
   test('should store a graph', async () => {
-    await expect(graphStorage.writeOne(graph)).resolves.toBeUndefined();
+    expectTypeOf(graphStorage.writeOne(graph)).resolves.toBeVoid()
+    await expect(graphStorage.writeOne(graph)).resolves.toBeUndefined()
   })
 
   test('should retrive a stored graph', async () => {
@@ -22,11 +23,13 @@ describe('GraphStorage Tests', () => {
   })
 
   test('should update a stored graph', async () => {
-    graph.nodes[0]?.neighbors.push({
-      id: '2',
+    const node: GraphNodeType = {
+      id: '1',
       neighbors: []
-    })
-    await expect(graphStorage.writeOne(graph)).resolves.toBeUndefined();
+    }
+    graph.nodes[0]?.neighbors.push(node)
+    expectTypeOf(graphStorage.writeOne(graph)).resolves.toBeVoid()
+    await expect(graphStorage.writeOne(graph)).resolves.toBeUndefined()
   })
 
   test('should retrive a updated graph', async () => {
@@ -34,7 +37,7 @@ describe('GraphStorage Tests', () => {
   })
 
   test('should delete graph', async () => {
-    await expect(graphStorage.deleteOneById('1')).resolves.toBeUndefined();
+    await expect(graphStorage.deleteOneById('1')).resolves.toBeUndefined()
   })
 
   test('should return empty array when no graph is present', async () => {
@@ -49,5 +52,4 @@ describe('GraphStorage Tests', () => {
   test('should not throw error when deleting non existent graph', async () => {
     await expect(graphStorage.deleteOneById('1')).resolves.toBeUndefined()
   })
-
 })

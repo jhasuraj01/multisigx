@@ -18,13 +18,13 @@
   },
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "lint": "eslint ./src/**/* --ext .ts,js --fix",
-    "lint:check": "eslint ./src/**/* --ext .ts,js",
-    "format": "prettier ./src/**/* --write",
-    "format:check": "prettier ./src/**/* --check",
+    "lint": "eslint ./src/**/* ./test/**/* --ext .ts,js --fix",
+    "lint:check": "eslint ./src/**/* ./test/**/* --ext .ts,js",
+    "format": "prettier ./src/**/* ./test/**/* --write",
+    "format:check": "prettier ./src/**/* ./test/**/* --check",
     "build": "tsup",
     "dev": "tsup --watch",
-    "clear": "rimraf dist",
+    "clear": "rimraf data coverage dist",
     "clear:all": "rimraf data coverage dist node_modules",
     "test": "vitest run --coverage",
     "test:dev": "vitest dev"
