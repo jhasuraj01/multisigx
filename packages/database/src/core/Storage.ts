@@ -1,5 +1,5 @@
 import { type Level } from 'level'
-import type { Database, DatabaseItemType } from './interface'
+import type { Database, DatabaseItemType } from '@jhasuraj01/interface'
 
 export class Storage<T extends DatabaseItemType> implements Database<T> {
   private readonly db

@@ -1,8 +1,8 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
-  "name": "@jhasuraj01/database",
+  "name": "@jhasuraj01/interface",
   "version": "0.0.0",
-  "description": "Speaker speaks speech",
+  "description": "MultisigX Interfaces",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -18,31 +18,23 @@
   },
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "lint": "eslint ./src/**/* ./test/**/* --ext .ts,js --fix",
-    "lint:check": "eslint ./src/**/* ./test/**/* --ext .ts,js",
-    "format": "prettier ./src/**/* ./test/**/* --write",
-    "format:check": "prettier ./src/**/* ./test/**/* --check",
+    "lint": "eslint ./src/**/* --ext .ts,js --fix",
+    "lint:check": "eslint ./src/**/* --ext .ts,js",
+    "format": "prettier ./src/**/* --write",
+    "format:check": "prettier ./src/**/* --check",
     "build": "tsup",
     "dev": "tsup --watch",
-    "clear": "rimraf data coverage dist",
-    "clear:all": "rimraf data coverage dist node_modules",
-    "test": "vitest run --coverage",
-    "test:dev": "vitest dev"
-  },
-  "dependencies": {
-    "level": "^8.0.1"
+    "clear": "rimraf dist",
+    "clear:all": "rimraf dist node_modules"
   },
   "devDependencies": {
     "@jhasuraj01/eslint-config": "workspace:*",
-    "@jhasuraj01/interface": "workspace:*",
     "@jhasuraj01/prettier-config": "workspace:*",
     "@jhasuraj01/tsconfig": "workspace:*",
     "@jhasuraj01/tsup": "workspace:*",
-    "@vitest/coverage-v8": "^1.3.1",
     "rimraf": "^5.0.5",
     "tsup": "^8.0.2",
-    "typescript": "^5.3.3",
-    "vitest": "^1.3.0"
+    "typescript": "^5.3.3"
   },
   "keywords": [],
   "author": {
