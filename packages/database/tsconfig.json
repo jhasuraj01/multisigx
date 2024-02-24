@@ -5,14 +5,15 @@
     "baseUrl": "./",
     "rootDir": "src",
     "outDir": "dist",
-    "declarationDir": "dist"
+    "declarationDir": "dist",
   },
   "include": [
     "./src/**/*.ts",
-    "./src/**/*.d.ts",
+    "./src/stores/index.ts",
   ],
   "exclude": [
     "node_modules",
-    "dist"
+    "dist",
+    "data"
   ]
 }
