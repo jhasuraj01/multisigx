@@ -25,7 +25,8 @@
     "build": "tsup",
     "dev": "tsup --watch",
     "clear": "rimraf dist",
-    "clear:all": "rimraf dist node_modules"
+    "clear:all": "rimraf dist node_modules",
+    "typecheck:src": "tsc -p ./tsconfig.json --noEmit"
   },
   "dependencies": {
     "@jhasuraj01/speak": "workspace:*"

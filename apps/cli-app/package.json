@@ -27,6 +27,8 @@
     "prepack": "pnpm run build && oclif manifest && oclif readme",
     "test": "chmod +x ./bin/dev.js && vitest run",
     "test:dev": "vitest dev",
+    "typecheck:src": "tsc -p ./tsconfig.json --noEmit",
+    "typecheck:test": "tsc -p ./test/tsconfig.json --noEmit",
     "version": "oclif readme && git add README.md"
   },
   "dependencies": {
