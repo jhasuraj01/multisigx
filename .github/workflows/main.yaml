@@ -36,6 +36,12 @@ jobs:
       - name: build
         run: pnpm build:all
 
+      - name: check source types
+        run: typecheck:src:all
+
+      - name: check test types
+        run: typecheck:test:all
+
       - name: lint check
         run: pnpm lint:check:all
 
