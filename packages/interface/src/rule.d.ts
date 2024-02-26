@@ -20,6 +20,14 @@ export interface BaseRule {
 }
 
 /**
+ * ### Start Rule
+ * A node from where the graph starts
+ */
+export type StartRule = BaseRule & {
+  type: 'START'
+}
+
+/**
  * ### And Rule
  * A rule that requires all of its subrules to be satisfied
  */
@@ -55,10 +63,19 @@ export type LogicRule = AndRule | ORRule | AtleastRule
 export type SignRule = BaseRule & {
   type: 'SIGN'
 
-  logicRule: LogicRule
+  logic: LogicRule
 
   /** The Ethereum address associated with the sign rule. */
   address: EthereumAddress
 }
 
-export type Rule = LogicRule | SignRule
+/**
+ * ### End Rule
+ * The final node of the graph
+ */
+export type EndRule = BaseRule & {
+  type: 'END'
+  logic: LogicRule
+}
+
+export type Rule = StartRule | LogicRule | SignRule | EndRule
