@@ -43,10 +43,10 @@ jobs:
         run: pnpm build
 
       - name: check source types
-        run: typecheck:src
+        run: pnpm typecheck:src
 
       - name: check test types
-        run: typecheck:test
+        run: pnpm typecheck:test
 
       - name: lint check
         run: pnpm lint:check
