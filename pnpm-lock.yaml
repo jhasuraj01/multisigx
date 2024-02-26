@@ -115,6 +115,9 @@ importers:
       '@jhasuraj01/eslint-config':
         specifier: workspace:*
         version: link:../eslint-config
+      '@jhasuraj01/interface':
+        specifier: workspace:*
+        version: link:../interface
       '@jhasuraj01/prettier-config':
         specifier: workspace:*
         version: link:../prettier-config
@@ -169,6 +172,30 @@ importers:
       '@jhasuraj01/speak':
         specifier: workspace:*
         version: link:../speak
+    devDependencies:
+      '@jhasuraj01/eslint-config':
+        specifier: workspace:*
+        version: link:../eslint-config
+      '@jhasuraj01/prettier-config':
+        specifier: workspace:*
+        version: link:../prettier-config
+      '@jhasuraj01/tsconfig':
+        specifier: workspace:*
+        version: link:../tsconfig
+      '@jhasuraj01/tsup':
+        specifier: workspace:*
+        version: link:../tsup
+      rimraf:
+        specifier: ^5.0.5
+        version: 5.0.5
+      tsup:
+        specifier: ^8.0.2
+        version: 8.0.2(typescript@5.3.3)
+      typescript:
+        specifier: ^5.3.3
+        version: 5.3.3
+
+  packages/interface:
     devDependencies:
       '@jhasuraj01/eslint-config':
         specifier: workspace:*
