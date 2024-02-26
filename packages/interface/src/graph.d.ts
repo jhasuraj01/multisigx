@@ -32,17 +32,17 @@ export interface IGraph {
    * ### Is Safe To Connect
    * @returns True if it is safe to connect the two rules
    *
-   * Usefull to prevent cycles in the graph in online mode.
+   * Useful to prevent cycles in the graph in online mode.
    */
   isSafeToConnect: (from: RuleID, to: RuleID) => Promise<boolean>
   connectRules: (from: RuleID, to: RuleID) => Promise<void>
   disconnectRules: (from: RuleID, to: RuleID) => Promise<void>
 
   /**
-   * ### Find All Safe Depentents
+   * ### Find All Safe Dependents
    * @returns List of all rule ids that are safe to connect from a given rule
    *
-   * Usefull when we would need to hide all others rules that are not safe to connect.
+   * Useful when we would need to hide all others rules that are not safe to connect.
    * This would be used in the UI to prevent the user from connecting rules that would
    * create a cycle in the graph.
    */
@@ -52,7 +52,7 @@ export interface IGraph {
    * ### Find All Cyclic Paths
    * @returns List of all paths that are part of a cycle
    *
-   * Usefull when graph would be imported from a JSON and we need
+   * Useful when graph would be imported from a JSON and we need
    * to display all the paths that are part of a cycle.
    */
   findAllCyclicPaths: () => Promise<RuleID[][]>
@@ -61,7 +61,7 @@ export interface IGraph {
    * ### Is Valid Directed Acyclic Graph
    * @returns True if the graph is a valid directed acyclic graph
    *
-   * Usefull when graph would be imported from a JSON and we need
+   * Useful when graph would be imported from a JSON and we need
    * to verify if the graph is a valid directed acyclic graph.
    */
   isValidDirectedAcyclicGraph: () => Promise<boolean>
