@@ -2,7 +2,7 @@ import { type Rule, type RuleID } from './rule'
 
 export type GraphID = string
 
-export interface IRuleGraphObject {
+export type RuleGraphObject = {
   id: GraphID
   identifier: 'multisigx-rule_graph_object'
   version: 1
@@ -23,7 +23,7 @@ export interface IRuleGraph {
    * ### Export Graph
    * @returns JSON representation of the graph
    */
-  export: () => IRuleGraphObject
+  export: () => RuleGraphObject
 
   addRule: (rule: Rule) => Promise<Rule>
   removeRule: (id: RuleID) => Promise<void>
