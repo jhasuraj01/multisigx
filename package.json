@@ -27,6 +27,10 @@
     "test": "nx affected -t test",
     "test:all": "nx run-many -t test",
     "test:config": "chmod +x test-config.sh && sh test-config.sh",
+    "typecheck:src": "nx affected -t typecheck:src",
+    "typecheck:src:all": "nx run-many -t typecheck:src",
+    "typecheck:test": "nx affected -t typecheck:test",
+    "typecheck:test:all": "nx run-many -t typecheck:test",
     "update:packages": "pnpm update --recursive"
   },
   "keywords": [],
@@ -45,7 +49,7 @@
   "packageManager": "pnpm@8.15.1",
   "devDependencies": {
     "husky": "^9.0.11",
-    "nx": "18.0.4",
+    "nx": "18.0.5",
     "rimraf": "^5.0.5"
   }
 }
