@@ -1,5 +1,15 @@
 import { type Rule, type RuleID } from './rule'
 
+export type GraphID = string
+
+export type GraphObject = {
+  title: string
+  description: string
+  id: GraphID
+  identifier: "multisigx_GraphObject"
+  rules: Rule[]
+}
+
 export interface IGraph {
   /**
    * ### Import Graph
@@ -12,7 +22,7 @@ export interface IGraph {
    * ### Export Graph
    * @returns JSON representation of the graph
    */
-  export: () => object
+  export: () => GraphObject
 
   createRule: (rule: Rule) => Promise<Rule>
   deleteRule: (id: RuleID) => Promise<void>
@@ -35,7 +45,7 @@ export interface IGraph {
    * This would be used in the UI to prevent the user from connecting rules that would
    * create a cycle in the graph.
    */
-  findAllSafeDepentents: (from: RuleID) => Promise<RuleID[]>
+  findAllSafeDependents: (from: RuleID) => Promise<RuleID[]>
 
   /**
    * ### Find All Cyclic Rules

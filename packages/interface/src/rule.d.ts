@@ -14,17 +14,9 @@ export interface BaseRule {
 
   /** set of rules this rule is dependent on */
   dependsOn: Set<RuleID>
-}
 
-/**
- * ### Sign Rule
- * A rule that requires a signature from a specific Ethereum address
- */
-export type SignRule = BaseRule & {
-  type: 'SIGN'
-
-  /** The Ethereum address associated with the sign rule. */
-  address: EthereumAddress
+  /** set of rules which depends on this rule */
+  dependents: Set<RuleID>
 }
 
 /**
@@ -54,4 +46,19 @@ export type AtleastRule = BaseRule & {
   count: number
 }
 
-export type Rule = AndRule
+export type LogicRule = AndRule | ORRule | AtleastRule;
+
+/**
+ * ### Sign Rule
+ * A rule that requires a signature from a specific Ethereum address
+ */
+export type SignRule = BaseRule & {
+  type: 'SIGN'
+
+  logicRule: LogicRule
+
+  /** The Ethereum address associated with the sign rule. */
+  address: EthereumAddress
+}
+
+export type Rule = LogicRule | SignRule
