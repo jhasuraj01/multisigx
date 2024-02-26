@@ -23,7 +23,7 @@ export interface BaseRule {
  * ### Start Rule
  * A node from where the graph starts
  */
-export type StartRule = BaseRule & {
+export type StartRule = Omit<BaseRule, 'dependsOn'> & {
   type: 'START'
 }
 
@@ -73,7 +73,7 @@ export type SignRule = BaseRule & {
  * ### End Rule
  * The final node of the graph
  */
-export type EndRule = BaseRule & {
+export type EndRule = Omit<BaseRule, 'dependents'> & {
   type: 'END'
   logic: LogicRule
 }
