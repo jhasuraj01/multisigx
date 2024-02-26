@@ -25,8 +25,8 @@ export interface IRuleGraph {
    */
   export: () => IRuleGraphObject
 
-  createRule: (rule: Rule) => Promise<Rule>
-  deleteRule: (id: RuleID) => Promise<void>
+  addRule: (rule: Rule) => Promise<Rule>
+  removeRule: (id: RuleID) => Promise<void>
 
   /**
    * ### Is Safe To Connect
