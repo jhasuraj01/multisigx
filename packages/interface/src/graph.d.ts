@@ -2,11 +2,12 @@ import { type Rule, type RuleID } from './rule'
 
 export type GraphID = string
 
-export type GraphObject = {
+export interface GraphObject {
+  id: GraphID
+  identifier: 'multisigx-graph_object'
+  version: 1
   title: string
   description: string
-  id: GraphID
-  identifier: "multisigx_GraphObject"
   rules: Rule[]
 }
 
@@ -46,15 +47,6 @@ export interface IGraph {
    * create a cycle in the graph.
    */
   findAllSafeDependents: (from: RuleID) => Promise<RuleID[]>
-
-  /**
-   * ### Find All Cyclic Rules
-   * @returns List of all rule ids that are part of a cycle
-   *
-   * Usefull when graph would be imported from a JSON and we need
-   * to display all the rules that are part of a cycle.
-   */
-  findAllCyclicRules: () => Promise<RuleID[]>
 
   /**
    * ### Find All Cyclic Paths

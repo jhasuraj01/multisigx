@@ -46,7 +46,7 @@ export type AtleastRule = BaseRule & {
   count: number
 }
 
-export type LogicRule = AndRule | ORRule | AtleastRule;
+export type LogicRule = AndRule | ORRule | AtleastRule
 
 /**
  * ### Sign Rule
