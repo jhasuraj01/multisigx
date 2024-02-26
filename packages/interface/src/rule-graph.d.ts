@@ -2,28 +2,28 @@ import { type Rule, type RuleID } from './rule'
 
 export type GraphID = string
 
-export interface GraphObject {
+export interface IRuleGraphObject {
   id: GraphID
-  identifier: 'multisigx-graph_object'
+  identifier: 'multisigx-rule_graph_object'
   version: 1
   title: string
   description: string
   rules: Rule[]
 }
 
-export interface IGraph {
+export interface IRuleGraph {
   /**
    * ### Import Graph
    * @param graph JSON representation of the graph
    * @returns The instance of the Graph
    */
-  import: (graph: object) => IGraph
+  import: (graph: object) => IRuleGraph
 
   /**
    * ### Export Graph
    * @returns JSON representation of the graph
    */
-  export: () => GraphObject
+  export: () => IRuleGraphObject
 
   createRule: (rule: Rule) => Promise<Rule>
   deleteRule: (id: RuleID) => Promise<void>
