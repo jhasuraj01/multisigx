@@ -1,4 +1,4 @@
-import { type Rule, type RuleID } from './rule'
+import type { Rule, RuleID } from './rule'
 
 export type GraphID = string
 
@@ -8,7 +8,7 @@ export type RuleGraphObject = {
   version: 1
   title: string
   description: string
-  rules: Rule[]
+  rules: Record<RuleID, Omit<Rule, 'id'>>
 }
 
 export interface IRuleGraph {
@@ -34,7 +34,7 @@ export interface IRuleGraph {
    *
    * Useful to prevent cycles in the graph in online mode.
    */
-  isSafeToConnect: (from: RuleID, to: RuleID) => Promise<boolean>
+  isSafeToConnect: (from: RuleID, to: RuleID) => boolean
   connectRules: (from: RuleID, to: RuleID) => Promise<void>
   disconnectRules: (from: RuleID, to: RuleID) => Promise<void>
 

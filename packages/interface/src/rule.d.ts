@@ -39,7 +39,7 @@ export type AndRule = BaseRule & {
  * ### OR Rule
  * A rule that requires at least one of its subrules to be satisfied
  */
-export type ORRule = BaseRule & {
+export type OrRule = BaseRule & {
   type: 'OR'
 }
 
@@ -54,7 +54,9 @@ export type AtleastRule = BaseRule & {
   count: number
 }
 
-export type LogicRule = AndRule | ORRule | AtleastRule
+export type LogicRule = AndRule | OrRule | AtleastRule
+
+export type InternalLogicRule = Omit<LogicRule, 'dependsOn' | 'dependents'>
 
 /**
  * ### Sign Rule
@@ -63,7 +65,7 @@ export type LogicRule = AndRule | ORRule | AtleastRule
 export type SignRule = BaseRule & {
   type: 'SIGN'
 
-  logic: LogicRule
+  internalLogic: InternalLogicRule
 
   /** The Ethereum address associated with the sign rule. */
   address: EthereumAddress
@@ -75,7 +77,7 @@ export type SignRule = BaseRule & {
  */
 export type EndRule = Omit<BaseRule, 'dependents'> & {
   type: 'END'
-  logic: LogicRule
+  internalLogic: InternalLogicRule
 }
 
 export type Rule = StartRule | LogicRule | SignRule | EndRule

@@ -1,3 +1,5 @@
+import { RuleGraphObject, IRuleGraph, Rule, RuleID } from "@jhasuraj01/interface"
+
 export class GraphNode<T> {
   id: T
   neighbors: Array<GraphNode<T>>
@@ -20,21 +22,38 @@ export class GraphNode<T> {
   }
 }
 
-export class Graph<T> {
-  nodes: Array<GraphNode<T>>
+export class Graph implements IRuleGraph {
 
-  constructor() {
-    this.nodes = []
+  private graphObject: RuleGraphObject
+
+  constructor(_graphObject: RuleGraphObject) {
+    this.graphObject = _graphObject;
   }
 
-  addNode = (id: T): GraphNode<T> => {
-    const node = new GraphNode(id)
-    this.nodes.push(node)
-    return node
+  static import(_graph: object): Graph {
+    throw new Error('Import Graph is Not Implemented')
   }
 
-  addEdge = (node1: GraphNode<T>, node2: GraphNode<T>): void => {
-    if (!this.hasPath(node2, node1)) {
+  export(): RuleGraphObject {
+    return structuredClone(this.graphObject)
+  }
+
+  addRule(_rule: Rule): Promise<Rule> {
+    this.graphObject.rules[];
+    // perform database operation
+    return Promise.resolve(_rule)
+  }
+
+  removeRule(): Promise<void> {
+    throw new Error('Remove Rule is Not Implemented')
+  }
+
+  isSafeToConnect(_from: RuleID, _to: RuleID): boolean {
+    throw new Error('isSafeToConnect is Not Implemented')
+  }
+
+  connectRules(_from: RuleID, _to: RuleID): Promise<void> {
+    if (this.isSafeToConnect(_from, _to)) {
       node1.addNeighbor(node2)
     } else {
       throw new Error('Cyclic Edges are not possible.')
