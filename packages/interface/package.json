@@ -51,5 +51,8 @@
   "engineStrict": true,
   "packageManager": "pnpm@8.15.1",
   "prettier": "@jhasuraj01/prettier-config",
-  "nx": {}
+  "nx": {},
+  "dependencies": {
+    "type-fest": "^4.10.3"
+  }
 }

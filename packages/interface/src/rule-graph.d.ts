@@ -1,4 +1,5 @@
 import type { Rule, RuleID } from './rule'
+import type { Except } from 'type-fest'
 
 export type GraphID = string
 
@@ -8,25 +9,25 @@ export type RuleGraphObject = {
   version: 1
   title: string
   description: string
-  rules: Record<RuleID, Omit<Rule, 'id'>>
+  rules: Record<RuleID, Except<Rule, 'id'>>
 }
 
-export interface IRuleGraph {
+export abstract class AbstractRuleGraph {
   /**
    * ### Import Graph
    * @param graph JSON representation of the graph
    * @returns The instance of the Graph
    */
-  import: (graph: object) => IRuleGraph
+  static import(graph: object): AbstractRuleGraph
 
   /**
    * ### Export Graph
    * @returns JSON representation of the graph
    */
-  export: () => RuleGraphObject
+  export(): RuleGraphObject
 
-  addRule: (rule: Rule) => Promise<Rule>
-  removeRule: (id: RuleID) => Promise<void>
+  addRule(rule: Rule): AbstractRuleGraph
+  removeRule(id: RuleID): AbstractRuleGraph
 
   /**
    * ### Is Safe To Connect
@@ -34,19 +35,19 @@ export interface IRuleGraph {
    *
    * Useful to prevent cycles in the graph in online mode.
    */
-  isSafeToConnect: (from: RuleID, to: RuleID) => boolean
-  connectRules: (from: RuleID, to: RuleID) => Promise<void>
-  disconnectRules: (from: RuleID, to: RuleID) => Promise<void>
+  isSafeToConnect(from: RuleID, to: RuleID): boolean
+  connectRules(from: RuleID, to: RuleID): AbstractRuleGraph
+  disconnectRules(from: RuleID, to: RuleID): AbstractRuleGraph
 
   /**
-   * ### Find All Safe Dependents
+   * ### Find All Safe Targets
    * @returns List of all rule ids that are safe to connect from a given rule
    *
    * Useful when we would need to hide all others rules that are not safe to connect.
    * This would be used in the UI to prevent the user from connecting rules that would
    * create a cycle in the graph.
    */
-  findAllSafeDependents: (from: RuleID) => Promise<RuleID[]>
+  findAllSafeTargets(from: RuleID): RuleID[]
 
   /**
    * ### Find All Cyclic Paths
@@ -55,7 +56,7 @@ export interface IRuleGraph {
    * Useful when graph would be imported from a JSON and we need
    * to display all the paths that are part of a cycle.
    */
-  findAllCyclicPaths: () => Promise<RuleID[][]>
+  findAllCyclicPaths(): RuleID[][]
 
   /**
    * ### Is Valid Directed Acyclic Graph
@@ -64,10 +65,10 @@ export interface IRuleGraph {
    * Useful when graph would be imported from a JSON and we need
    * to verify if the graph is a valid directed acyclic graph.
    */
-  isValidDirectedAcyclicGraph: () => Promise<boolean>
+  isValidDirectedAcyclicGraph(): boolean
 
-  getRule: (id: RuleID) => Promise<Rule>
-  getAllRules: () => Promise<Rule[]>
-  getDependents: (id: RuleID) => Promise<Rule[]>
-  getDependencies: (id: RuleID) => Promise<Rule[]>
+  getRule(id: RuleID): Rule
+  getAllRules(): Rule[]
+  getDependents(id: RuleID): Rule[]
+  getDependencies(id: RuleID): Rule[]
 }

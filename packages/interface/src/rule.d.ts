@@ -1,3 +1,5 @@
+import type { Except } from 'type-fest'
+
 export type EthereumAddress = string
 export type RuleID = string
 
@@ -5,7 +7,7 @@ export type RuleID = string
  * ### Base Rule
  * The base rule that all rules extend from
  */
-export interface BaseRule {
+export type BaseRule = {
   /** unique identifier for the rule */
   id: RuleID
 
@@ -23,7 +25,7 @@ export interface BaseRule {
  * ### Start Rule
  * A node from where the graph starts
  */
-export type StartRule = Omit<BaseRule, 'dependsOn'> & {
+export type StartRule = Except<BaseRule, 'dependsOn'> & {
   type: 'START'
 }
 
@@ -56,7 +58,7 @@ export type AtleastRule = BaseRule & {
 
 export type LogicRule = AndRule | OrRule | AtleastRule
 
-export type InternalLogicRule = Omit<LogicRule, 'dependsOn' | 'dependents'>
+export type InternalLogicRule = Except<LogicRule, 'dependsOn' | 'dependents' | 'name' | 'id' >
 
 /**
  * ### Sign Rule
@@ -75,7 +77,7 @@ export type SignRule = BaseRule & {
  * ### End Rule
  * The final node of the graph
  */
-export type EndRule = Omit<BaseRule, 'dependents'> & {
+export type EndRule = Except<BaseRule, 'dependents'> & {
   type: 'END'
   internalLogic: InternalLogicRule
 }
