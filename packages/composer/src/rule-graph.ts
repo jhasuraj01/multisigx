@@ -57,7 +57,7 @@ export class RuleGraph extends AbstractRuleGraph {
   }
 
   override connectRules(_from: RuleID, _to: RuleID): RuleGraph {
-    
+
     if(!this.isSafeToConnect(_from, _to))
       throw new Error('Cyclic Edges are not possible.')
 
@@ -67,11 +67,11 @@ export class RuleGraph extends AbstractRuleGraph {
     if(source === undefined) throw new Error('_from: RuleID is invalid, Rule Not Found')
     if(target === undefined) throw new Error('_to: RuleID is invalid, Rule Not Found')
 
-    if(source.type === 'START') throw new Error('_from: RuleID is invalid, StartRule can not have dependencies')
-    if(target.type === 'END') throw new Error('_to: RuleID is invalid, EndRule can not have dependents')
+    if(source.type === 'END') throw new Error('_to: RuleID is invalid, EndRule can not have dependents')
+    if(target.type === 'START') throw new Error('_from: RuleID is invalid, StartRule can not have dependencies')
 
-    source.dependsOn.add(_to)
-    target.dependents.add(_from)
+    source.dependents.add(_to)
+    target.dependsOn.add(_from)
 
     this.graphObject.rules[_from] = source
     this.graphObject.rules[_to] = target
@@ -100,10 +100,16 @@ export class RuleGraph extends AbstractRuleGraph {
     throw new Error('disconnectRules is not implemented')
   }
 
+  /**
+   * @todo Implement for UI
+   */
   override findAllSafeTargets(_from: RuleID): RuleID[] {
     throw new Error('findAllSafeTargets is not implemented')
   }
 
+  /**
+   * @todo Implement for UI
+   */
   override findAllCyclicPaths(): RuleID[][] {
     throw new Error('findAllCyclicPaths is not implemented')
   }
@@ -127,7 +133,6 @@ export class RuleGraph extends AbstractRuleGraph {
   override getDependencies(_id: RuleID): Rule[] {
     throw new Error('findAllCyclicPaths is not implemented')
   }
-
 
   // printAdjacencyList = (): void => {
   //   this.nodes.forEach((node) => {
