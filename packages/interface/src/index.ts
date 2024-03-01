@@ -1,4 +1,5 @@
-export type * from './rule-graph'
-export type * from './rule'
+export type * from './AbstractRuleGraph'
 export type * from './database'
+export type * from './rule'
+export type * from './rule-graph'
 export type * from './utils'

@@ -1,16 +1,5 @@
 import type { Rule, RuleID } from './rule'
-import type { Except } from 'type-fest'
-
-export type GraphID = string
-
-export type RuleGraphObject = {
-  id: GraphID
-  identifier: 'multisigx-rule_graph_object'
-  version: 1
-  title: string
-  description: string
-  rules: Record<RuleID, Rule>
-}
+import type { RuleGraphObject } from './rule-graph'
 
 export abstract class AbstractRuleGraph {
   /**
