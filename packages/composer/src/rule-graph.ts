@@ -49,26 +49,69 @@ export class RuleGraph extends AbstractRuleGraph {
   }
 
   override removeRule(_id: RuleID): RuleGraph {
-    throw new Error('Remove Rule is Not Implemented')
+    const ruleToRemove = this.graphObject.rules[_id]
+
+    if (ruleToRemove === undefined)
+      throw new Error('_id: RuleID is invalid, Rule Not Found')
+
+    if (ruleToRemove.type !== 'END') {
+      ruleToRemove.dependents.forEach((_dependentId) => {
+        this.disconnectRules(_id, _dependentId)
+      })
+    }
+
+    if (ruleToRemove.type !== 'START') {
+      ruleToRemove.dependsOn.forEach((_dependOnId) => {
+        this.disconnectRules(_dependOnId, _id)
+      })
+    }
+
+    delete this.graphObject.rules[_id]
+
+    return this
   }
 
   override isSafeToConnect(_from: RuleID, _to: RuleID): boolean {
-    throw new Error('isSafeToConnect is Not Implemented')
+    const source = this.graphObject.rules[_from]
+    const target = this.graphObject.rules[_to]
+
+    if (source === undefined)
+      throw new Error('_from: RuleID is invalid, Rule Not Found')
+    if (target === undefined)
+      throw new Error('_to: RuleID is invalid, Rule Not Found')
+
+    if (source.type === 'END')
+      throw new Error('_to: RuleID is invalid, EndRule can not have dependents')
+    if (target.type === 'START')
+      throw new Error(
+        '_from: RuleID is invalid, StartRule can not have dependencies'
+      )
+
+    return (
+      source.type === 'START' ||
+      target.type === 'END' ||
+      this.hasPath(_to, _from) === false
+    )
   }
 
   override connectRules(_from: RuleID, _to: RuleID): RuleGraph {
-
-    if(!this.isSafeToConnect(_from, _to))
+    if (!this.isSafeToConnect(_from, _to))
       throw new Error('Cyclic Edges are not possible.')
 
     const source = this.graphObject.rules[_from]
     const target = this.graphObject.rules[_to]
 
-    if(source === undefined) throw new Error('_from: RuleID is invalid, Rule Not Found')
-    if(target === undefined) throw new Error('_to: RuleID is invalid, Rule Not Found')
+    if (source === undefined)
+      throw new Error('_from: RuleID is invalid, Rule Not Found')
+    if (target === undefined)
+      throw new Error('_to: RuleID is invalid, Rule Not Found')
 
-    if(source.type === 'END') throw new Error('_to: RuleID is invalid, EndRule can not have dependents')
-    if(target.type === 'START') throw new Error('_from: RuleID is invalid, StartRule can not have dependencies')
+    if (source.type === 'END')
+      throw new Error('_to: RuleID is invalid, EndRule can not have dependents')
+    if (target.type === 'START')
+      throw new Error(
+        '_from: RuleID is invalid, StartRule can not have dependencies'
+      )
 
     source.dependents.add(_to)
     target.dependsOn.add(_from)
@@ -76,28 +119,56 @@ export class RuleGraph extends AbstractRuleGraph {
     this.graphObject.rules[_from] = source
     this.graphObject.rules[_to] = target
 
-    return this;
+    return this
   }
 
-  // hasPath = (
-  //   fromNode: GraphNode<T>,
-  //   toNode: GraphNode<T>,
-  //   visited: Set<GraphNode<T>> = new Set()
-  // ): boolean => {
-  //   if (fromNode === toNode) {
-  //     return true
-  //   }
-  //   visited.add(fromNode)
-  //   for (const neighbor of fromNode.neighbors) {
-  //     if (!visited.has(neighbor) && this.hasPath(neighbor, toNode, visited)) {
-  //       return true
-  //     }
-  //   }
-  //   return false
-  // }
+  hasPath = (
+    _from: RuleID,
+    _to: RuleID,
+    visited: Set<RuleID> = new Set()
+  ): boolean => {
+    if (_from === _to) return true
+
+    visited.add(_from)
+
+    const source = this.graphObject.rules[_from]
+
+    if (source === undefined)
+      throw new Error('_from: RuleID is invalid, Rule Not Found')
+
+    if (source.type === 'END') return false
+
+    for (const _dependent of source.dependents) {
+      if (!visited.has(_dependent) && this.hasPath(_dependent, _to, visited)) {
+        return true
+      }
+    }
+
+    return false
+  }
 
   override disconnectRules(_from: RuleID, _to: RuleID): RuleGraph {
-    throw new Error('disconnectRules is not implemented')
+    const source = this.graphObject.rules[_from]
+    const target = this.graphObject.rules[_to]
+
+    if (source === undefined)
+      throw new Error('_from: RuleID is invalid, Rule Not Found')
+    if (target === undefined)
+      throw new Error('_to: RuleID is invalid, Rule Not Found')
+
+    if (source.type === 'END')
+      throw new Error(
+        '_to: RuleID is invalid, EndRule does not have dependents'
+      )
+    if (target.type === 'START')
+      throw new Error(
+        '_from: RuleID is invalid, StartRule does not have dependencies'
+      )
+
+    source.dependents.delete(_from)
+    target.dependsOn.delete(_to)
+
+    return this
   }
 
   /**

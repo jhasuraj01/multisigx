@@ -58,7 +58,10 @@ export type AtleastRule = BaseRule & {
 
 export type LogicRule = AndRule | OrRule | AtleastRule
 
-export type InternalLogicRule = Except<LogicRule, 'dependsOn' | 'dependents' | 'name' | 'id' >
+export type InternalLogicRule = Except<
+  LogicRule,
+  'dependsOn' | 'dependents' | 'name' | 'id'
+>
 
 /**
  * ### Sign Rule
