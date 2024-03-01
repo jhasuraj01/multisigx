@@ -9,7 +9,7 @@ export type RuleGraphObject = {
   version: 1
   title: string
   description: string
-  rules: Record<RuleID, Except<Rule, 'id'>>
+  rules: Record<RuleID, Rule>
 }
 
 export abstract class AbstractRuleGraph {
