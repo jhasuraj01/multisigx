@@ -53,6 +53,8 @@
   "prettier": "@jhasuraj01/prettier-config",
   "nx": {},
   "dependencies": {
-    "type-fest": "^4.10.3"
+    "type-fest": "^4.10.3",
+    "zod": "^3.22.4",
+    "zod.discriminatedunion": "^1.0.1"
   }
 }

@@ -2,7 +2,8 @@ import {
   RuleGraphObject,
   AbstractRuleGraph,
   Rule,
-  RuleID
+  RuleID,
+  RuleGraphObjectSchema
 } from '@jhasuraj01/interface'
 
 export class GraphNode<T> {
@@ -36,7 +37,8 @@ export class RuleGraph extends AbstractRuleGraph {
   }
 
   static override import(_graph: object): RuleGraph {
-    throw new Error('Import Graph is Not Implemented')
+    const _graphObject = RuleGraphObjectSchema.parse(_graph);
+    return new RuleGraph(_graphObject)
   }
 
   override export(): RuleGraphObject {
