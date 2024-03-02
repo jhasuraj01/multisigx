@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { RuleSchema, type Rule, type RuleID } from './rule'
+import { RuleSchema, type Rule, type RuleID, RuleIDSchema } from './rule'
 
 export type GraphID = string
 export const GraphIDSchema = z.string()
@@ -10,7 +10,7 @@ export interface RuleGraphObject {
   version: 1
   title: string
   description: string
-  rules: Record<RuleID, Rule>
+  rules: Map<RuleID, Rule>
 }
 export const RuleGraphObjectSchema = z.object({
   id: GraphIDSchema,
@@ -18,5 +18,5 @@ export const RuleGraphObjectSchema = z.object({
   version: z.literal(1),
   title: z.string(),
   description: z.string(),
-  rules: z.record(RuleSchema)
+  rules: z.map(RuleIDSchema, RuleSchema)
 })

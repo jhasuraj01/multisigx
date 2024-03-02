@@ -1,15 +1,15 @@
 import {
-  AndRule,
-  AtleastRule,
-  BaseRule,
-  InternalLogicRule,
-  LogicRule,
-  OrRule,
-  RuleID,
-  SignRule
+  type EndRule,
+  type AndRule,
+  type AtleastRule,
+  type BaseRule,
+  type OrRule,
+  type RuleID,
+  type SignRule,
+  type StartRule
 } from '@jhasuraj01/interface'
 import {
-  Config,
+  type Config,
   adjectives,
   animals,
   colors,
@@ -35,13 +35,13 @@ const nameGeneratorConfig: Config = {
   length: 2
 }
 
-type BaseRuleParams = {
+interface BaseRuleParams {
   name?: BaseRule['name']
   dependsOn?: RuleID[]
   dependents?: RuleID[]
 }
 
-function generate_rule_base(_params?: BaseRuleParams): BaseRule {
+function generateBaseRule(_params?: BaseRuleParams): BaseRule {
   return {
     id: uuid(),
     name: _params?.name ?? uniqueNamesGenerator(nameGeneratorConfig),
@@ -50,24 +50,27 @@ function generate_rule_base(_params?: BaseRuleParams): BaseRule {
   }
 }
 
-export function convert_internal_logic(logic: LogicRule): InternalLogicRule {
-  // Destructure the logic object to exclude dependsOn and dependents properties
-  const { dependsOn, dependents, ...internalLogic } = logic
-  return internalLogic
+export type StartRuleParams = BaseRuleParams
+export function generateStartRule(_params?: StartRuleParams): StartRule {
+  const { dependsOn, ...baseRule } = generateBaseRule(_params)
+  return {
+    ...baseRule,
+    type: 'START'
+  }
 }
 
 export type OrRuleParams = BaseRuleParams
-export function generate_rule_or(_params?: OrRuleParams): OrRule {
+export function generateOrRule(_params?: OrRuleParams): OrRule {
   return {
-    ...generate_rule_base(_params),
+    ...generateBaseRule(_params),
     type: 'OR'
   }
 }
 
 export type AndRuleParams = BaseRuleParams
-export function generate_rule_and(_params?: AndRuleParams): AndRule {
+export function generateAndRule(_params?: AndRuleParams): AndRule {
   return {
-    ...generate_rule_base(_params),
+    ...generateBaseRule(_params),
     type: 'AND'
   }
 }
@@ -75,11 +78,9 @@ export function generate_rule_and(_params?: AndRuleParams): AndRule {
 export type AtleastRuleParams = BaseRuleParams & {
   count?: number
 }
-export function generate_rule_atleast(
-  _params?: AtleastRuleParams
-): AtleastRule {
+export function generateAtleastRule(_params?: AtleastRuleParams): AtleastRule {
   return {
-    ...generate_rule_base(_params),
+    ...generateBaseRule(_params),
     type: 'ATLEAST',
     count: _params?.count ?? 1
   }
@@ -87,14 +88,25 @@ export function generate_rule_atleast(
 
 export type SignRuleParams = BaseRuleParams & {
   address: SignRule['address']
-  internalLogic: SignRule['internalLogic']
+  internalLogic?: SignRule['internalLogic']
 }
-export function generate_sign_rule(_params: SignRuleParams): SignRule {
+export function generateSignRule(_params: SignRuleParams): SignRule {
   return {
-    ...generate_rule_base(_params),
+    ...generateBaseRule(_params),
     type: 'SIGN',
     address: _params.address,
-    internalLogic:
-      _params.internalLogic ?? convert_internal_logic(generate_rule_and())
+    internalLogic: _params.internalLogic ?? generateAndRule()
+  }
+}
+
+export type EndRuleParams = BaseRuleParams & {
+  internalLogic?: EndRule['internalLogic']
+}
+export function generateEndRule(_params: EndRuleParams): EndRule {
+  const { dependents, ...baseRule } = generateBaseRule(_params)
+  return {
+    ...baseRule,
+    type: 'END',
+    internalLogic: _params.internalLogic ?? generateAndRule()
   }
 }

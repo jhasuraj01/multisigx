@@ -13,8 +13,8 @@
   "exports": "./dist/index.js",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "clear": "rimraf dist tsconfig.tsbuildinfo",
-    "clear:all": "rimraf dist tsconfig.tsbuildinfo node_modules",
+    "clear": "rimraf data dist tsconfig.tsbuildinfo",
+    "clear:all": "rimraf data dist tsconfig.tsbuildinfo node_modules",
     "build": "rimraf dist && tsc -b",
     "postbuild": "chmod +x ./bin/run.js",
     "dev": "tsc --watch",
@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "@jhasuraj01/composer": "workspace:*",
+    "@jhasuraj01/database": "workspace:*",
     "@jhasuraj01/hello": "workspace:*",
     "@jhasuraj01/speak": "workspace:*",
     "@jhasuraj01/tsconfig": "workspace:*",

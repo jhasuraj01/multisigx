@@ -1,35 +1,13 @@
 import {
-  RuleGraphObject,
+  type RuleGraphObject,
   AbstractRuleGraph,
-  Rule,
-  RuleID,
+  type Rule,
+  type RuleID,
   RuleGraphObjectSchema
 } from '@jhasuraj01/interface'
 
-export class GraphNode<T> {
-  id: T
-  neighbors: Array<GraphNode<T>>
-
-  constructor(id: T) {
-    this.id = id
-    this.neighbors = []
-  }
-
-  addNeighbor = (neighbor: GraphNode<T>): void => {
-    this.neighbors.push(neighbor)
-  }
-
-  removeNeighbor = (neighbor: GraphNode<T>): void => {
-    this.neighbors = this.neighbors.filter((node) => node !== neighbor)
-  }
-
-  updateValue = (newValue: T): void => {
-    this.id = newValue
-  }
-}
-
 export class RuleGraph extends AbstractRuleGraph {
-  private graphObject: RuleGraphObject
+  private readonly graphObject: RuleGraphObject
 
   constructor(_graphObject: RuleGraphObject) {
     super()
@@ -37,7 +15,7 @@ export class RuleGraph extends AbstractRuleGraph {
   }
 
   static override import(_graph: object): RuleGraph {
-    const _graphObject = RuleGraphObjectSchema.parse(_graph);
+    const _graphObject = RuleGraphObjectSchema.parse(_graph)
     return new RuleGraph(_graphObject)
   }
 
@@ -45,13 +23,13 @@ export class RuleGraph extends AbstractRuleGraph {
     return structuredClone(this.graphObject)
   }
 
-  override addRule(_rule: Rule): RuleGraph {
-    this.graphObject.rules[_rule.id] = _rule
+  override addRule(_rule: Rule): this {
+    this.graphObject.rules.set(_rule.id, _rule)
     return this
   }
 
-  override removeRule(_id: RuleID): RuleGraph {
-    const ruleToRemove = this.graphObject.rules[_id]
+  override removeRule(_id: RuleID): this {
+    const ruleToRemove = this.graphObject.rules.get(_id)
 
     if (ruleToRemove === undefined)
       throw new Error('_id: RuleID is invalid, Rule Not Found')
@@ -68,14 +46,14 @@ export class RuleGraph extends AbstractRuleGraph {
       })
     }
 
-    delete this.graphObject.rules[_id]
+    this.graphObject.rules.delete(_id)
 
     return this
   }
 
   override isSafeToConnect(_from: RuleID, _to: RuleID): boolean {
-    const source = this.graphObject.rules[_from]
-    const target = this.graphObject.rules[_to]
+    const source = this.graphObject.rules.get(_from)
+    const target = this.graphObject.rules.get(_to)
 
     if (source === undefined)
       throw new Error('_from: RuleID is invalid, Rule Not Found')
@@ -92,16 +70,16 @@ export class RuleGraph extends AbstractRuleGraph {
     return (
       source.type === 'START' ||
       target.type === 'END' ||
-      this.hasPath(_to, _from) === false
+      !this.hasPath(_to, _from)
     )
   }
 
-  override connectRules(_from: RuleID, _to: RuleID): RuleGraph {
+  override connectRules(_from: RuleID, _to: RuleID): this {
     if (!this.isSafeToConnect(_from, _to))
       throw new Error('Cyclic Edges are not possible.')
 
-    const source = this.graphObject.rules[_from]
-    const target = this.graphObject.rules[_to]
+    const source = this.graphObject.rules.get(_from)
+    const target = this.graphObject.rules.get(_to)
 
     if (source === undefined)
       throw new Error('_from: RuleID is invalid, Rule Not Found')
@@ -118,9 +96,6 @@ export class RuleGraph extends AbstractRuleGraph {
     source.dependents.add(_to)
     target.dependsOn.add(_from)
 
-    this.graphObject.rules[_from] = source
-    this.graphObject.rules[_to] = target
-
     return this
   }
 
@@ -133,7 +108,7 @@ export class RuleGraph extends AbstractRuleGraph {
 
     visited.add(_from)
 
-    const source = this.graphObject.rules[_from]
+    const source = this.graphObject.rules.get(_from)
 
     if (source === undefined)
       throw new Error('_from: RuleID is invalid, Rule Not Found')
@@ -149,9 +124,9 @@ export class RuleGraph extends AbstractRuleGraph {
     return false
   }
 
-  override disconnectRules(_from: RuleID, _to: RuleID): RuleGraph {
-    const source = this.graphObject.rules[_from]
-    const target = this.graphObject.rules[_to]
+  override disconnectRules(_from: RuleID, _to: RuleID): this {
+    const source = this.graphObject.rules.get(_from)
+    const target = this.graphObject.rules.get(_to)
 
     if (source === undefined)
       throw new Error('_from: RuleID is invalid, Rule Not Found')

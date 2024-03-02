@@ -23,6 +23,9 @@ importers:
       '@jhasuraj01/composer':
         specifier: workspace:*
         version: link:../../packages/composer
+      '@jhasuraj01/database':
+        specifier: workspace:*
+        version: link:../../packages/database
       '@jhasuraj01/hello':
         specifier: workspace:*
         version: link:../../packages/hello
