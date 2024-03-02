@@ -1,8 +1,8 @@
 import { graphStorage } from '@jhasuraj01/database'
 import { Args, Command, Flags } from '@oclif/core'
+import { RuleGraph } from '@jhasuraj01/composer'
 import { handleError } from 'src/utils/index.js'
 
-import { RuleGraph } from '../../../../../../packages/composer/dist/index.js'
 
 export default class CreateEdge extends Command {
   static override args = {

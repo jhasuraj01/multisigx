@@ -1,8 +1,7 @@
 import { graphStorage } from '@jhasuraj01/database'
 import { Args, Command, Flags } from '@oclif/core'
 import { handleError } from 'src/utils/index.js'
-
-import { RuleGraph } from '../../../../../../packages/composer/dist/index.js'
+import { RuleGraph } from '@jhasuraj01/composer'
 
 export default class DeleteEdge extends Command {
   static override args = {
