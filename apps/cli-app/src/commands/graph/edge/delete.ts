@@ -1,7 +1,6 @@
+import { RuleGraph } from '@jhasuraj01/composer'
 import { graphStorage } from '@jhasuraj01/database'
 import { Args, Command, Flags } from '@oclif/core'
-import { handleError } from 'src/utils/index.js'
-import { RuleGraph } from '@jhasuraj01/composer'
 
 export default class DeleteEdge extends Command {
   static override args = {
@@ -38,7 +37,13 @@ export default class DeleteEdge extends Command {
       await graphStorage.writeOne(graph.export())
       this.log(`Edge deleted between nodes ${flags.from} and ${flags.to}`)
     } catch (error) {
-      handleError(this, error)
+      if (error instanceof Error) {
+        this.logToStderr(`${error.name}: ${error.message}`)
+      } else if (typeof error === 'string') {
+        this.logToStderr(error)
+      } else {
+        throw error
+      }
     }
   }
 }
