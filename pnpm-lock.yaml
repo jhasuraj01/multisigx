@@ -29,12 +29,18 @@ importers:
       '@jhasuraj01/hello':
         specifier: workspace:*
         version: link:../../packages/hello
+      '@jhasuraj01/interface':
+        specifier: workspace:^
+        version: link:../../packages/interface
       '@jhasuraj01/speak':
         specifier: workspace:*
         version: link:../../packages/speak
       '@jhasuraj01/tsconfig':
         specifier: workspace:*
         version: link:../../packages/tsconfig
+      '@jhasuraj01/utils':
+        specifier: workspace:^
+        version: link:../../packages/utils
       '@oclif/core':
         specifier: ^3.20.0
         version: 3.20.0
@@ -90,6 +96,9 @@ importers:
       '@jhasuraj01/interface':
         specifier: workspace:*
         version: link:../interface
+      type-fest:
+        specifier: ^4.10.3
+        version: 4.10.3
       unique-names-generator:
         specifier: ^4.7.1
         version: 4.7.1
@@ -124,6 +133,9 @@ importers:
 
   packages/database:
     dependencies:
+      '@jhasuraj01/utils':
+        specifier: workspace:^
+        version: link:../utils
       level:
         specifier: ^8.0.1
         version: 8.0.1
@@ -310,6 +322,39 @@ importers:
       typescript:
         specifier: ^5.3.3
         version: 5.3.3
+
+  packages/utils:
+    devDependencies:
+      '@jhasuraj01/eslint-config':
+        specifier: workspace:*
+        version: link:../eslint-config
+      '@jhasuraj01/prettier-config':
+        specifier: workspace:*
+        version: link:../prettier-config
+      '@jhasuraj01/tsconfig':
+        specifier: workspace:*
+        version: link:../tsconfig
+      '@jhasuraj01/tsup':
+        specifier: workspace:*
+        version: link:../tsup
+      '@types/node':
+        specifier: ^20.11.24
+        version: 20.11.24
+      '@vitest/coverage-v8':
+        specifier: ^1.3.1
+        version: 1.3.1(vitest@1.3.1)
+      rimraf:
+        specifier: ^5.0.5
+        version: 5.0.5
+      tsup:
+        specifier: ^8.0.2
+        version: 8.0.2(typescript@5.3.3)
+      typescript:
+        specifier: ^5.3.3
+        version: 5.3.3
+      vitest:
+        specifier: ^1.3.1
+        version: 1.3.1(@types/node@20.11.24)
 
 packages:
 

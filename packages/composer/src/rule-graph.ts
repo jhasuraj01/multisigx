@@ -3,15 +3,45 @@ import {
   AbstractRuleGraph,
   type Rule,
   type RuleID,
-  RuleGraphObjectSchema
+  RuleGraphObjectSchema,
+  CreateRuleGraphParams
 } from '@jhasuraj01/interface'
+import { nameGeneratorBaseConfig } from './utils'
+import { uniqueNamesGenerator } from 'unique-names-generator'
+import { generateEndRule, generateStartRule } from './rule-generator'
+
+const graphTitleGeneratorConfig = {
+  ...nameGeneratorBaseConfig,
+  separator: ' ',
+  length: 5
+}
 
 export class RuleGraph extends AbstractRuleGraph {
   private readonly graphObject: RuleGraphObject
 
-  constructor(_graphObject: RuleGraphObject) {
+  private constructor(_graphObject: RuleGraphObject) {
     super()
     this.graphObject = _graphObject
+  }
+
+  static override create(_params: CreateRuleGraphParams): RuleGraph {
+    const startRule = generateStartRule({ name: 'Start Rule' })
+    const endRule = generateEndRule({ name: 'End Rule' })
+
+    const rules = new Map<RuleID, Rule>()
+    rules.set(startRule.id, startRule);
+    rules.set(endRule.id, endRule);
+
+    const ruleGraphObject: RuleGraphObject = {
+      id: _params.id,
+      identifier: 'multisigx-rule_graph_object',
+      version: _params.version ?? 1,
+      title: _params.title ?? uniqueNamesGenerator(graphTitleGeneratorConfig),
+      description: _params.description ?? '',
+      rules: rules
+    }
+
+    return new RuleGraph(ruleGraphObject)
   }
 
   static override import(_graph: object): RuleGraph {

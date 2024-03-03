@@ -1,10 +1,26 @@
 import type { Rule, RuleID } from './rule'
 import type { RuleGraphObject } from './rule-graph'
 
+export interface CreateRuleGraphParams {
+  id: RuleGraphObject['id']
+  version?: RuleGraphObject['version']
+  title?: RuleGraphObject['title']
+  description?: RuleGraphObject['description']
+}
+
 export abstract class AbstractRuleGraph {
   /**
+   * ### Create New Graph
+   * @param _params Graph parameters
+   * @returns The instance of the Graph
+   */
+  static create(_params: CreateRuleGraphParams): AbstractRuleGraph {
+    throw new Error('AbstractRuleGraph.create not implemented.')
+  }
+
+  /**
    * ### Import Graph
-   * @param graph JSON representation of the graph
+   * @param _graph JSON representation of the graph
    * @returns The instance of the Graph
    */
   static import(_graph: object): AbstractRuleGraph {

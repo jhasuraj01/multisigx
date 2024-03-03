@@ -4,53 +4,35 @@ import {
   type AtleastRule,
   type BaseRule,
   type OrRule,
-  type RuleID,
   type SignRule,
   type StartRule
 } from '@jhasuraj01/interface'
-import {
-  type Config,
-  adjectives,
-  animals,
-  colors,
-  countries,
-  languages,
-  names,
-  starWars,
-  uniqueNamesGenerator
-} from 'unique-names-generator'
-import { v4 as uuid } from 'uuid'
+import { uniqueNamesGenerator } from 'unique-names-generator'
+import { nameGeneratorBaseConfig, uuid } from './utils'
+import { type Except } from 'type-fest'
 
-const nameGeneratorConfig: Config = {
-  dictionaries: [
-    adjectives,
-    animals,
-    colors,
-    countries,
-    languages,
-    names,
-    starWars
-  ],
-  separator: '-',
-  length: 2
+const ruleNameGeneratorConfig = {
+  ...nameGeneratorBaseConfig,
+  separator: ' ',
+  length: 3
 }
 
 interface BaseRuleParams {
   name?: BaseRule['name']
-  dependsOn?: RuleID[]
-  dependents?: RuleID[]
+  dependsOn?: BaseRule['dependsOn']
+  dependents?: BaseRule['dependents']
 }
 
 function generateBaseRule(_params?: BaseRuleParams): BaseRule {
   return {
     id: uuid(),
-    name: _params?.name ?? uniqueNamesGenerator(nameGeneratorConfig),
+    name: _params?.name ?? uniqueNamesGenerator(ruleNameGeneratorConfig),
     dependsOn: new Set(_params?.dependsOn ?? []),
     dependents: new Set(_params?.dependents ?? [])
   }
 }
 
-export type StartRuleParams = BaseRuleParams
+export type StartRuleParams = Except<BaseRuleParams, 'dependsOn'>
 export function generateStartRule(_params?: StartRuleParams): StartRule {
   const { dependsOn, ...baseRule } = generateBaseRule(_params)
   return {
@@ -99,7 +81,7 @@ export function generateSignRule(_params: SignRuleParams): SignRule {
   }
 }
 
-export type EndRuleParams = BaseRuleParams & {
+export type EndRuleParams = Except<BaseRuleParams, 'dependents'> & {
   internalLogic?: EndRule['internalLogic']
 }
 export function generateEndRule(_params: EndRuleParams): EndRule {
