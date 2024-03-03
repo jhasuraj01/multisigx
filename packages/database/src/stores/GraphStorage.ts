@@ -1,17 +1,8 @@
+import { type RuleGraphObject } from '@jhasuraj01/interface'
 import type { Level } from 'level'
 import { Storage } from '../core'
 
-export interface GraphNodeType {
-  id: string
-  neighbors: GraphNodeType[]
-}
-
-export interface GraphType {
-  id: string
-  nodes: GraphNodeType[]
-}
-
-export class GraphStorage extends Storage<GraphType> {
+export class GraphStorage extends Storage<RuleGraphObject> {
   constructor(db: Level) {
     super(db, 'graphs')
   }

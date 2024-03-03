@@ -2,40 +2,38 @@ import { RuleGraph } from '@jhasuraj01/composer'
 import { graphStorage } from '@jhasuraj01/database'
 import { Args, Command, Flags } from '@oclif/core'
 
-export default class DeleteEdge extends Command {
+export default class CreateEdge extends Command {
   static override args = {
     graphId: Args.string({ description: 'Graph Id', required: true })
   }
 
   static override description = 'Create an edge between two nodes in the graph'
 
-  static override examples = [
-    '<%= config.bin %> <%= command.id %> graphid -f 1 -t 2',
-    '<%= config.bin %> <%= command.id %> graphid -f 1 -t 2'
-  ]
+  static override examples = ['<%= config.bin %> <%= command.id %>']
 
   static override flags = {
-    from: Flags.string({
-      char: 'f',
-      description: 'ID of the starting node',
-      required: true
+    description: Flags.string({
+      description: 'Description of the Graph',
+      required: false
     }),
-    to: Flags.string({
-      char: 't',
-      description: 'ID of the ending node',
-      required: true
+    title: Flags.string({
+      description: 'Description of the Title',
+      required: false
     })
   }
 
   public async run(): Promise<void> {
-    const { args, flags } = await this.parse(DeleteEdge)
+    const { args, flags } = await this.parse(CreateEdge)
 
     try {
-      const graphObject = await graphStorage.findOneById(args.graphId)
-      const graph = RuleGraph.import(graphObject)
-      graph.disconnectRules(flags.from, flags.to)
+      const graph = RuleGraph.create({
+        description: flags.description,
+        id: args.graphId,
+        title: flags.title
+      })
       await graphStorage.writeOne(graph.export())
-      this.log(`Edge deleted between nodes ${flags.from} and ${flags.to}`)
+      this.log('Graph created')
+      this.logJson(graph.export())
     } catch (error) {
       if (error instanceof Error) {
         this.logToStderr(`${error.name}: ${error.message}`)

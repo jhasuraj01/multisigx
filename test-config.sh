@@ -1,5 +1,7 @@
 clear \
 && pnpm i \
+&& pnpm update \
+&& pnpm update:packages \
 && pnpm clear:all \
 && pnpm i \
 && pnpm build \
