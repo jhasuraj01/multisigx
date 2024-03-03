@@ -192,24 +192,89 @@ export class RuleGraph extends AbstractRuleGraph {
     throw new Error('findAllCyclicPaths is not implemented')
   }
 
+  private hasCycle(
+    nodeId: RuleID,
+    visited: Set<RuleID>,
+    pathVisited: Set<RuleID>
+  ): boolean {
+    if (pathVisited.has(nodeId)) {
+      return true
+    }
+    if (visited.has(nodeId)) {
+      return false
+    }
+
+    visited.add(nodeId)
+    pathVisited.add(nodeId)
+
+    const rule = this.getRule(nodeId)
+    if (rule.type === 'END') {
+      return false
+    }
+
+    for (const neighborId of rule.dependents) {
+      if (this.hasCycle(neighborId, visited, pathVisited)) {
+        return true
+      }
+    }
+
+    pathVisited.delete(nodeId)
+    return false
+  }
+
   override isValidDirectedAcyclicGraph(): boolean {
-    throw new Error('findAllCyclicPaths is not implemented')
+    const visited = new Set<RuleID>()
+    const pathVisited = new Set<RuleID>()
+
+    for (const ruleID in this.graphObject.rules) {
+      if (this.hasCycle(ruleID, visited, pathVisited)) {
+        return false
+      }
+    }
+    return true
   }
 
   override getRule(_id: RuleID): Rule {
-    throw new Error('findAllCyclicPaths is not implemented')
+    const rule = this.graphObject.rules.get(_id)
+    if (rule === undefined) {
+      throw new Error(`Rule with ID '${_id}' not found.`)
+    }
+    return rule
   }
 
   override getAllRules(): Rule[] {
-    throw new Error('findAllCyclicPaths is not implemented')
+    return Array.from(this.graphObject.rules.values())
   }
 
   override getDependents(_id: RuleID): Rule[] {
-    throw new Error('findAllCyclicPaths is not implemented')
+    const rule = this.getRule(_id)
+    if (rule.type === 'END') {
+      throw new Error(`END RULE does not have any dependents.`)
+    }
+
+    const dependents: Rule[] = []
+    for (const dependentId of rule.dependents) {
+      const dependentRule = this.getRule(dependentId)
+      dependents.push(dependentRule)
+    }
+
+    return dependents
   }
 
   override getDependencies(_id: RuleID): Rule[] {
-    throw new Error('findAllCyclicPaths is not implemented')
+    const rule = this.getRule(_id)
+
+    if (rule.type === 'START') {
+      throw new Error(`StartRule does not have dependencies.`)
+    }
+
+    const dependencies: Rule[] = []
+    for (const dependencyId of rule.dependsOn) {
+      const dependencyRule = this.getRule(dependencyId)
+      dependencies.push(dependencyRule)
+    }
+
+    return dependencies
   }
 
   // printAdjacencyList = (): void => {
