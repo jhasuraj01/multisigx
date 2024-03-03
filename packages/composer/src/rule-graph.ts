@@ -162,36 +162,47 @@ export class RuleGraph extends AbstractRuleGraph {
     throw new Error('findAllCyclicPaths is not implemented')
   }
 
-  // override isValidDirectedAcyclicGraph(): boolean {
-  //   const visited = new Set<RuleID>();
-  //   const visiting = new Set<RuleID>();
+  private hasCycle(
+    nodeId: RuleID,
+    visited: Set<RuleID>,
+    pathVisited: Set<RuleID>
+  ): boolean {
+    if (pathVisited.has(nodeId)) {
+      return true
+    }
+    if (visited.has(nodeId)) {
+      return false
+    }
 
-  //   for (const rule of this.getAllRules()) {
-  //     if (this.hasCycle(rule.id, visited, visiting)) {
-  //       return false;
-  //     }
-  //   }
-  //   return true;
-  // }
+    visited.add(nodeId)
+    pathVisited.add(nodeId)
 
-  // hasCycle(ruleId: RuleID, visited: Set<RuleID>, visiting: Set<RuleID>): boolean {
-  //   if (visiting.has(ruleId)) {
-  //     return true;
-  //   }
+    const rule = this.getRule(nodeId)
+    if (rule.type === 'END') {
+      return false
+    }
 
-  //   visiting.add(ruleId);
-  //   const rule =
-  //   for (const dependentRuleId of this.getDependents(ruleId)) {
-  //     if (this.hasCycle(dependentRuleId, visited, visiting)) {
-  //       return true;
-  //     }
-  //   }
+    for (const neighborId of rule.dependents) {
+      if (this.hasCycle(neighborId, visited, pathVisited)) {
+        return true
+      }
+    }
 
-  //   visiting.delete(ruleId);
-  //   visited.add(ruleId);
+    pathVisited.delete(nodeId)
+    return false
+  }
 
-  //   return false;
-  // }
+  override isValidDirectedAcyclicGraph(): boolean {
+    const visited = new Set<RuleID>()
+    const pathVisited = new Set<RuleID>()
+
+    for (const ruleID in this.graphObject.rules) {
+      if (this.hasCycle(ruleID, visited, pathVisited)) {
+        return false
+      }
+    }
+    return true
+  }
 
   override getRule(_id: RuleID): Rule {
     const rule = this.graphObject.rules.get(_id)
