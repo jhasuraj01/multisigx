@@ -28,17 +28,6 @@ export default class CreateRule extends Command {
   static override flags = {
     address: Flags.string({
       description: 'Ethereum Address',
-      relationships: [
-        {
-          flags: [
-            {
-              name: 'type',
-              when: async (flags) => flags['type'] === 'SIGN'
-            }
-          ],
-          type: 'all'
-        }
-      ],
       required: true
     }),
     graph: Flags.string({

@@ -9,9 +9,7 @@ export default class CreateEdge extends Command {
 
   static override description = 'Create an edge between two nodes in the graph'
 
-  static override examples = [
-    '<%= config.bin %> <%= command.id %>',
-  ]
+  static override examples = ['<%= config.bin %> <%= command.id %>']
 
   static override flags = {
     description: Flags.string({
