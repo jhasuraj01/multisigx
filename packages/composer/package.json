@@ -24,9 +24,12 @@
     "format:check": "prettier ./src/**/* --check",
     "build": "tsup",
     "dev": "tsup --watch",
-    "clear": "rimraf dist",
-    "clear:all": "rimraf dist node_modules",
-    "typecheck:src": "tsc -p ./tsconfig.json --noEmit"
+    "clear": "rimraf coverage data dist",
+    "clear:all": "rimraf coverage data dist node_modules",
+    "test": "vitest run --coverage",
+    "test:dev": "vitest dev",
+    "typecheck:src": "tsc -p ./tsconfig.json --noEmit",
+    "typecheck:test": "tsc -p ./test/tsconfig.json --noEmit"
   },
   "dependencies": {
     "@jhasuraj01/interface": "workspace:*",
@@ -40,9 +43,11 @@
     "@jhasuraj01/tsconfig": "workspace:*",
     "@jhasuraj01/tsup": "workspace:*",
     "@types/uuid": "^9.0.8",
+    "@vitest/coverage-v8": "^1.3.1",
     "rimraf": "^5.0.5",
     "tsup": "^8.0.2",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "vitest": "^1.3.1"
   },
   "keywords": [],
   "author": {
