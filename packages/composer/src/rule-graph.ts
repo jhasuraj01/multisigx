@@ -24,7 +24,7 @@ export class RuleGraph extends AbstractRuleGraph {
     this.graphObject = _graphObject
   }
 
-  static override create(_params: CreateRuleGraphParams): RuleGraph {
+  static override create(_params?: CreateRuleGraphParams): RuleGraph {
     const startRule = generateStartRule({ id: 'start', name: 'Start Rule' })
     const endRule = generateEndRule({ id: 'end',  name: 'End Rule' })
 
@@ -33,11 +33,11 @@ export class RuleGraph extends AbstractRuleGraph {
     rules.set(endRule.id, endRule);
 
     const ruleGraphObject: RuleGraphObject = RuleGraphObjectSchema.parse({
-      id: _params.id ?? uuid(),
+      id: _params?.id ?? uuid(),
       identifier: 'multisigx-rule_graph_object',
-      version: _params.version ?? 1,
-      title: _params.title ?? uniqueNamesGenerator(graphTitleGeneratorConfig),
-      description: _params.description ?? '',
+      version: _params?.version ?? 1,
+      title: _params?.title ?? uniqueNamesGenerator(graphTitleGeneratorConfig),
+      description: _params?.description ?? '',
       rules: rules
     })
 

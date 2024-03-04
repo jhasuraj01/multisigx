@@ -33,6 +33,6 @@
     }
   },
   "affected": {
-    "defaultBase": "origin/main"
+    "defaultBase": "origin/feat/composer"
   }
 }

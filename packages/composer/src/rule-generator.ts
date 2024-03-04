@@ -85,17 +85,17 @@ export function generateSignRule(_params: SignRuleParams): SignRule {
     ...generateBaseRule(_params),
     type: 'SIGN',
     address: _params.address,
-    internalLogic: InternalLogicRuleSchema.parse(_params.internalLogic ?? generateAndRule())
+    internalLogic: InternalLogicRuleSchema.parse(_params?.internalLogic ?? generateAndRule())
   })
 }
 
 export type EndRuleParams = Except<BaseRuleParams, 'dependents'> & {
   internalLogic?: EndRule['internalLogic']
 }
-export function generateEndRule(_params: EndRuleParams): EndRule {
+export function generateEndRule(_params?: EndRuleParams): EndRule {
   return EndRuleSchema.parse({
     ...generateBaseRule(_params),
     type: 'END',
-    internalLogic: InternalLogicRuleSchema.parse(_params.internalLogic ?? generateAndRule())
+    internalLogic: InternalLogicRuleSchema.parse(_params?.internalLogic ?? generateAndRule())
   })
 }
