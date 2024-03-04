@@ -1,5 +1,6 @@
 import { RuleGraph } from '@jhasuraj01/composer'
 import { graphStorage } from '@jhasuraj01/database'
+import { oneWaySerialize } from '@jhasuraj01/utils'
 import { Args, Command, Flags } from '@oclif/core'
 
 export default class CreateEdge extends Command {
@@ -33,7 +34,7 @@ export default class CreateEdge extends Command {
       })
       await graphStorage.writeOne(graph.export())
       this.log('Graph created')
-      this.logJson(graph.export())
+      this.logJson(oneWaySerialize(graph.export()))
     } catch (error) {
       if (error instanceof Error) {
         this.logToStderr(`${error.name}: ${error.message}`)

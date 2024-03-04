@@ -1,6 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
-  "name": "@jhasuraj01/database",
+  "name": "@jhasuraj01/utils",
+  "private": true,
   "version": "0.0.0",
   "description": "Speaker speaks speech",
   "main": "./dist/index.cjs",
@@ -31,13 +32,9 @@
     "typecheck:src": "tsc -p ./tsconfig.json --noEmit",
     "typecheck:test": "tsc -p ./test/tsconfig.json --noEmit"
   },
-  "dependencies": {
-    "@jhasuraj01/utils": "workspace:*",
-    "level": "^8.0.1"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@jhasuraj01/eslint-config": "workspace:*",
-    "@jhasuraj01/interface": "workspace:*",
     "@jhasuraj01/prettier-config": "workspace:*",
     "@jhasuraj01/tsconfig": "workspace:*",
     "@jhasuraj01/tsup": "workspace:*",
