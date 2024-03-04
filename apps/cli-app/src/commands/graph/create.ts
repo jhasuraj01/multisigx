@@ -5,7 +5,7 @@ import { Args, Command, Flags } from '@oclif/core'
 
 export default class CreateGraph extends Command {
   static override args = {
-    graphId: Args.string({ description: 'Graph Id', required: true })
+    graphId: Args.string({ description: 'Graph Id', required: false })
   }
 
   static override description = 'create new graph'

@@ -18,7 +18,7 @@ const ruleOptions: Array<LogicRule['type'] | SignRule['type']> = [
 
 export default class CreateRule extends Command {
   static override args = {
-    name: Args.string({ description: 'Rule Name', required: false })
+    ruleId: Args.string({ description: 'Rule Id', required: false })
   }
 
   static override description = 'Create new rule'
@@ -28,11 +28,15 @@ export default class CreateRule extends Command {
   static override flags = {
     address: Flags.string({
       description: 'Ethereum Address',
-      required: true
+      required: false
     }),
     graph: Flags.string({
       description: 'Graph ID',
       required: true
+    }),
+    name: Flags.string({
+      description: 'Rule Name',
+      required: false
     }),
     type: Flags.string({
       default: 'AND',
@@ -51,23 +55,33 @@ export default class CreateRule extends Command {
 
       switch (flags.type) {
         case 'AND': {
-          graph.addRule(generateAndRule({ name: args.name }))
+          graph.addRule(generateAndRule({ id: args.ruleId, name: flags.name }))
           break
         }
 
         case 'OR': {
-          graph.addRule(generateOrRule({ name: args.name }))
+          graph.addRule(generateOrRule({ id: args.ruleId, name: flags.name }))
           break
         }
 
         case 'ATLEAST': {
-          graph.addRule(generateAtleastRule({ name: args.name }))
+          graph.addRule(
+            generateAtleastRule({ id: args.ruleId, name: flags.name })
+          )
           break
         }
 
         case 'SIGN': {
+          if (flags.address === undefined) {
+            throw new Error('Address is required for SIGN rule')
+          }
+
           graph.addRule(
-            generateSignRule({ address: flags.address, name: args.name })
+            generateSignRule({
+              address: flags.address,
+              id: args.ruleId,
+              name: flags.name
+            })
           )
           break
         }

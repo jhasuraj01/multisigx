@@ -26,6 +26,7 @@ const ruleNameGeneratorConfig = {
 }
 
 interface BaseRuleParams {
+  id?: BaseRule['id']
   name?: BaseRule['name']
   dependsOn?: BaseRule['dependsOn']
   dependents?: BaseRule['dependents']
@@ -33,7 +34,7 @@ interface BaseRuleParams {
 
 function generateBaseRule(_params?: BaseRuleParams): BaseRule {
   return BaseRuleSchema.parse({
-    id: uuid(),
+    id: _params?.id ?? uuid(),
     name: _params?.name ?? uniqueNamesGenerator(ruleNameGeneratorConfig),
     dependsOn: new Set(_params?.dependsOn ?? []),
     dependents: new Set(_params?.dependents ?? [])
