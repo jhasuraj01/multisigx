@@ -38,14 +38,14 @@
     "@jhasuraj01/interface": "workspace:*",
     "@jhasuraj01/speak": "workspace:*",
     "@jhasuraj01/tsconfig": "workspace:*",
-    "@jhasuraj01/utils": "workspace:^",
+    "@jhasuraj01/utils": "workspace:*",
     "@oclif/core": "^3.20.0",
     "@oclif/plugin-help": "^6.0.15",
     "@oclif/plugin-plugins": "^4.2.7",
     "rimraf": "5.0.5"
   },
   "devDependencies": {
-    "@jhasuraj01/eslint-config": "workspace:^",
+    "@jhasuraj01/eslint-config": "workspace:*",
     "@jhasuraj01/prettier-config": "workspace:*",
     "@oclif/prettier-config": "^0.2.1",
     "@types/node": "^20.11.24",
