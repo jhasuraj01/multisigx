@@ -15,7 +15,7 @@
     "preinstall": "npx only-allow pnpm",
     "clear": "rimraf data dist tsconfig.tsbuildinfo",
     "clear:all": "rimraf data dist tsconfig.tsbuildinfo node_modules",
-    "build": "rimraf dist && tsc -b",
+    "build": "tsc -b",
     "postbuild": "chmod +x ./bin/run.js",
     "dev": "tsc --watch",
     "lint": "eslint ./src/**/* ./test/**/* --ext .ts,js --fix",
@@ -87,8 +87,14 @@
       "@oclif/plugin-plugins"
     ],
     "topics": {
-      "speak": {
-        "description": "Say hello to the world and others"
+      "graph": {
+        "description": "Manage graphs"
+      },
+      "rule": {
+        "description": "Manage rules within graph"
+      },
+      "rule:create": {
+        "description": "Create `and`, `or`, `atleast`, `sign` rule"
       }
     },
     "topicSeparator": " "

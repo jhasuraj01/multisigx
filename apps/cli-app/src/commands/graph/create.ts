@@ -4,20 +4,27 @@ import { oneWaySerialize } from '@jhasuraj01/utils'
 import { Args, Command, Flags } from '@oclif/core'
 
 export default class CreateGraph extends Command {
+  static override aliases = ['create:graph']
+
   static override args = {
-    graphId: Args.string({ description: 'Graph Id', required: false })
+    graph: Args.string({ description: 'graph id', required: false })
   }
 
-  static override description = 'create new graph'
+  static override description = 'Create new graph'
 
-  static override examples = ['<%= config.bin %> <%= command.id %>']
+  static override examples = [
+    '<%= config.bin %> <%= command.id %> graph-id -t "Graph Title" -d "Graph Description"',
+    '<%= config.bin %> <%= command.id %> graph-id --title="Graph Title" --description="Graph Description"'
+  ]
 
   static override flags = {
     description: Flags.string({
+      char: 'd',
       description: 'Description of the Graph',
       required: false
     }),
     title: Flags.string({
+      char: 't',
       description: 'Description of the Title',
       required: false
     })
@@ -29,7 +36,7 @@ export default class CreateGraph extends Command {
     try {
       const graph = RuleGraph.create({
         description: flags.description,
-        id: args.graphId,
+        id: args.graph,
         title: flags.title
       })
       await graphStorage.writeOne(graph.export())
