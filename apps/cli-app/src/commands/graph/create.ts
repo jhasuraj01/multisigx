@@ -3,12 +3,12 @@ import { graphStorage } from '@jhasuraj01/database'
 import { oneWaySerialize } from '@jhasuraj01/utils'
 import { Args, Command, Flags } from '@oclif/core'
 
-export default class CreateEdge extends Command {
+export default class CreateGraph extends Command {
   static override args = {
     graphId: Args.string({ description: 'Graph Id', required: true })
   }
 
-  static override description = 'Create an edge between two nodes in the graph'
+  static override description = 'create new graph'
 
   static override examples = ['<%= config.bin %> <%= command.id %>']
 
@@ -24,7 +24,7 @@ export default class CreateEdge extends Command {
   }
 
   public async run(): Promise<void> {
-    const { args, flags } = await this.parse(CreateEdge)
+    const { args, flags } = await this.parse(CreateGraph)
 
     try {
       const graph = RuleGraph.create({
