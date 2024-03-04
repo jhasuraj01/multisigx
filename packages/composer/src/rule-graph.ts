@@ -32,14 +32,14 @@ export class RuleGraph extends AbstractRuleGraph {
     rules.set(startRule.id, startRule);
     rules.set(endRule.id, endRule);
 
-    const ruleGraphObject: RuleGraphObject = {
+    const ruleGraphObject: RuleGraphObject = RuleGraphObjectSchema.parse({
       id: _params.id,
       identifier: 'multisigx-rule_graph_object',
       version: _params.version ?? 1,
       title: _params.title ?? uniqueNamesGenerator(graphTitleGeneratorConfig),
       description: _params.description ?? '',
       rules: rules
-    }
+    })
 
     return new RuleGraph(ruleGraphObject)
   }
