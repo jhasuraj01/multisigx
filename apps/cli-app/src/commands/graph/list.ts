@@ -2,6 +2,8 @@ import { graphStorage } from '@jhasuraj01/database'
 import { Command } from '@oclif/core'
 
 export default class ListGraphs extends Command {
+  static override aliases = ['list:graph']
+
   static override description = 'List all the graphs in the database'
 
   static override examples = ['<%= config.bin %> <%= command.id %>']

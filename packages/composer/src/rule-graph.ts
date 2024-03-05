@@ -25,8 +25,8 @@ export class RuleGraph extends AbstractRuleGraph {
   }
 
   static override create(_params: CreateRuleGraphParams): RuleGraph {
-    const startRule = generateStartRule({ id: 'start-rule', name: 'Start Rule' })
-    const endRule = generateEndRule({ id: 'end-rule',  name: 'End Rule' })
+    const startRule = generateStartRule({ id: 'start', name: 'Start Rule' })
+    const endRule = generateEndRule({ id: 'end',  name: 'End Rule' })
 
     const rules = new Map<RuleID, Rule>()
     rules.set(startRule.id, startRule);
