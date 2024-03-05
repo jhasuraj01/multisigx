@@ -38,6 +38,9 @@ importers:
       '@jhasuraj01/tsconfig':
         specifier: workspace:*
         version: link:../../packages/tsconfig
+      '@jhasuraj01/utils':
+        specifier: workspace:*
+        version: link:../../packages/utils
       '@oclif/core':
         specifier: ^3.20.0
         version: 3.20.0
@@ -52,7 +55,7 @@ importers:
         version: 5.0.5
     devDependencies:
       '@jhasuraj01/eslint-config':
-        specifier: workspace:^
+        specifier: workspace:*
         version: link:../../packages/eslint-config
       '@jhasuraj01/prettier-config':
         specifier: workspace:*
@@ -76,8 +79,8 @@ importers:
         specifier: ^8.0.1
         version: 8.0.1
       oclif:
-        specifier: ^4.4.20
-        version: 4.4.20
+        specifier: ^4.4.21
+        version: 4.4.21
       ts-node:
         specifier: ^10.9.2
         version: 10.9.2(@types/node@20.11.24)(typescript@5.3.3)
@@ -94,8 +97,8 @@ importers:
         specifier: workspace:*
         version: link:../interface
       type-fest:
-        specifier: ^4.10.3
-        version: 4.10.3
+        specifier: ^4.11.0
+        version: 4.11.0
       unique-names-generator:
         specifier: ^4.7.1
         version: 4.7.1
@@ -136,6 +139,9 @@ importers:
 
   packages/database:
     dependencies:
+      '@jhasuraj01/utils':
+        specifier: workspace:*
+        version: link:../utils
       level:
         specifier: ^8.0.1
         version: 8.0.1
@@ -226,8 +232,8 @@ importers:
   packages/interface:
     dependencies:
       type-fest:
-        specifier: ^4.10.3
-        version: 4.10.3
+        specifier: ^4.11.0
+        version: 4.11.0
       zod:
         specifier: ^3.22.4
         version: 3.22.4
@@ -322,6 +328,39 @@ importers:
       typescript:
         specifier: ^5.3.3
         version: 5.3.3
+
+  packages/utils:
+    devDependencies:
+      '@jhasuraj01/eslint-config':
+        specifier: workspace:*
+        version: link:../eslint-config
+      '@jhasuraj01/prettier-config':
+        specifier: workspace:*
+        version: link:../prettier-config
+      '@jhasuraj01/tsconfig':
+        specifier: workspace:*
+        version: link:../tsconfig
+      '@jhasuraj01/tsup':
+        specifier: workspace:*
+        version: link:../tsup
+      '@types/node':
+        specifier: ^20.11.24
+        version: 20.11.24
+      '@vitest/coverage-v8':
+        specifier: ^1.3.1
+        version: 1.3.1(vitest@1.3.1)
+      rimraf:
+        specifier: ^5.0.5
+        version: 5.0.5
+      tsup:
+        specifier: ^8.0.2
+        version: 8.0.2(typescript@5.3.3)
+      typescript:
+        specifier: ^5.3.3
+        version: 5.3.3
+      vitest:
+        specifier: ^1.3.1
+        version: 1.3.1(@types/node@20.11.24)
 
 packages:
 
@@ -2811,7 +2850,7 @@ packages:
       istanbul-lib-report: 3.0.1
       istanbul-lib-source-maps: 4.0.1
       istanbul-reports: 3.1.7
-      magic-string: 0.30.7
+      magic-string: 0.30.8
       magicast: 0.3.3
       picocolors: 1.0.0
       std-env: 3.7.0
@@ -2841,7 +2880,7 @@ packages:
   /@vitest/snapshot@1.3.1:
     resolution: {integrity: sha512-EF++BZbt6RZmOlE3SuTPu/NfwBF6q4ABS37HHXzs2LUVPBLx2QoY/K0fKpRChSo8eLiuxcbCVfqKgx/dplCDuQ==}
     dependencies:
-      magic-string: 0.30.7
+      magic-string: 0.30.8
       pathe: 1.1.2
       pretty-format: 29.7.0
     dev: true
@@ -5913,8 +5952,8 @@ packages:
     engines: {node: '>=12'}
     dev: true
 
-  /magic-string@0.30.7:
-    resolution: {integrity: sha512-8vBuFF/I/+OSLRmdf2wwFCJCz+nSn0m6DPvGH1fS/KiQoSaR+sETbov0eIk9KhEKy8CYqIkIAnbohxT/4H0kuA==}
+  /magic-string@0.30.8:
+    resolution: {integrity: sha512-ISQTe55T2ao7XtlAStud6qwYPZjE4GK1S/BeVPus4jrq6JuOnQ00YKQC581RWhR122W7msZV263KzVeLoqidyQ==}
     engines: {node: '>=12'}
     dependencies:
       '@jridgewell/sourcemap-codec': 1.4.15
@@ -6779,8 +6818,8 @@ packages:
       es-abstract: 1.22.5
     dev: true
 
-  /oclif@4.4.20:
-    resolution: {integrity: sha512-M/Gj1KsEifXWT+R9UBtEwp3IGnGEoqXxnT1oze65x5NGddgYAXyAeSmtrjeHk6rmylwUctg0mzyhX5o6JQdj9Q==}
+  /oclif@4.4.21:
+    resolution: {integrity: sha512-Fjfxq+rY20nzdIcmq4M5yKUYG9KYRto63RvOgQuHFpdZ4boAvM2XoZ3MPRhdG2uGQW++5MajODM/U8MPkaNHRA==}
     engines: {node: '>=18.0.0'}
     hasBin: true
     dependencies:
@@ -8331,8 +8370,8 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /type-fest@4.10.3:
-    resolution: {integrity: sha512-JLXyjizi072smKGGcZiAJDCNweT8J+AuRxmPZ1aG7TERg4ijx9REl8CNhbr36RV4qXqL1gO1FF9HL8OkVmmrsA==}
+  /type-fest@4.11.0:
+    resolution: {integrity: sha512-DPsoHKtnCUqqoB5Y4OPyat7ObSLz1XOkhHTmz+gOkz2p1xs+BBneTvHWriTwc313eozfBWh8b45EpaV3ZrrPPQ==}
     engines: {node: '>=16'}
     dev: false
 
@@ -8646,7 +8685,7 @@ packages:
       debug: 4.3.4(supports-color@8.1.1)
       execa: 8.0.1
       local-pkg: 0.5.0
-      magic-string: 0.30.7
+      magic-string: 0.30.8
       pathe: 1.1.2
       picocolors: 1.0.0
       std-env: 3.7.0

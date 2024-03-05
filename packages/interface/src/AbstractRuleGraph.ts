@@ -2,7 +2,7 @@ import type { Rule, RuleID } from './rule'
 import type { RuleGraphObject } from './rule-graph'
 
 export interface CreateRuleGraphParams {
-  id: RuleGraphObject['id']
+  id?: RuleGraphObject['id']
   version?: RuleGraphObject['version']
   title?: RuleGraphObject['title']
   description?: RuleGraphObject['description']

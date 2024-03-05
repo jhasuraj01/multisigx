@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "@jhasuraj01/interface": "workspace:*",
-    "type-fest": "^4.10.3",
+    "type-fest": "^4.11.0",
     "unique-names-generator": "^4.7.1",
     "uuid": "^9.0.1"
   },
