@@ -39,6 +39,7 @@
     "@vitest/coverage-v8": "^1.3.1",
     "rimraf": "^5.0.5",
     "tsup": "^8.0.2",
+    "type-fest": "^4.11.1",
     "typescript": "^5.3.3",
     "vitest": "^1.3.1"
   },
@@ -59,7 +60,6 @@
   "prettier": "@jhasuraj01/prettier-config",
   "nx": {},
   "dependencies": {
-    "type-fest": "^4.11.0",
     "zod": "^3.22.4",
     "zod.discriminatedunion": "^1.0.1"
   }
