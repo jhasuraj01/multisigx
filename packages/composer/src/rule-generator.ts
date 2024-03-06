@@ -61,7 +61,7 @@ export type AndRuleParams = BaseRuleParams
 export function generateAndRule(_params?: AndRuleParams): AndRule {
   return AndRuleSchema.parse({
     ...generateBaseRule(_params),
-    type: 'AND'
+    type: 'AND',
   })
 }
 
