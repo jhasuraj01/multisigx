@@ -34,7 +34,6 @@ jobs:
       - name: log params
         run: |
           echo NX_BASE = $NX_BASE
-          echo NX_CLOUD_ACCESS_TOKEN = $NX_CLOUD_ACCESS_TOKEN
           echo node version = $(node --version)
           echo pnpm version = $(pnpm --version)
 
