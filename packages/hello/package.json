@@ -38,7 +38,7 @@
     "@jhasuraj01/tsup": "workspace:*",
     "rimraf": "^5.0.5",
     "tsup": "^8.0.2",
-    "typescript": "^5.3.3"
+    "typescript": "^5.4.2"
   },
   "keywords": [],
   "author": {
