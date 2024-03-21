@@ -1,5 +1,5 @@
 import { AndRule, AtleastRule, EndRule, OrRule, Rule, SignRule, StartRule } from '@jhasuraj01/interface'
-import { RuleGraph, generateAndRule, generateAtleastRule, generateOrRule, generateSignRule } from '../src'
+import { RuleGraph, generateAndRule, generateAtleastRule, generateOrRule, generateSignRule } from '../../src'
 import { describe, test, expect } from 'vitest'
 
 
