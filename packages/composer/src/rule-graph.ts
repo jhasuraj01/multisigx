@@ -214,6 +214,7 @@ export class RuleGraph extends AbstractRuleGraph {
 
     const rule = this.getRule(nodeId)
     if (rule.type === 'END') {
+      pathVisited.delete(nodeId)
       return false
     }
 
@@ -230,8 +231,7 @@ export class RuleGraph extends AbstractRuleGraph {
   override isValidDirectedAcyclicGraph(): boolean {
     const visited = new Set<RuleID>()
     const pathVisited = new Set<RuleID>()
-
-    for (const ruleID in this.graphObject.rules) {
+    for (const [ruleID] of this.graphObject.rules) {
       if (this.hasCycle(ruleID, visited, pathVisited)) {
         return false
       }
