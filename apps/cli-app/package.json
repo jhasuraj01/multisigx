@@ -39,6 +39,7 @@
     "@jhasuraj01/speak": "workspace:*",
     "@jhasuraj01/tsconfig": "workspace:*",
     "@jhasuraj01/utils": "workspace:*",
+    "@jhasuraj01/walletconnect": "workspace:^",
     "@oclif/core": "^3.23.0",
     "@oclif/plugin-help": "^6.0.16",
     "@oclif/plugin-plugins": "^4.3.1",
