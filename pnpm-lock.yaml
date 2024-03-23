@@ -373,6 +373,9 @@ importers:
 
   packages/walletconnect:
     dependencies:
+      '@jhasuraj01/database':
+        specifier: workspace:*
+        version: link:../database
       '@types/qrcode':
         specifier: ^1.5.5
         version: 1.5.5

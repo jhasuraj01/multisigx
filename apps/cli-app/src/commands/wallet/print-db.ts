@@ -1,8 +1,8 @@
-import { connect } from '@jhasuraj01/walletconnect'
+import { walletConnectStorage } from '@jhasuraj01/database'
 import { Command } from '@oclif/core'
 
 export default class ConnectGraph extends Command {
-  static override aliases = ['connect:wallet']
+  static override aliases = ['print:walletconnect-db']
 
   static override description = 'Connect Wallet'
 
@@ -11,8 +11,7 @@ export default class ConnectGraph extends Command {
   ]
 
   public async run(): Promise<void> {
-    const session = await connect();
-    this.logJson(session);
-    process.exit(0);
+    const entries = await walletConnectStorage.getEntries();
+    this.logJson(entries);
   }
 }

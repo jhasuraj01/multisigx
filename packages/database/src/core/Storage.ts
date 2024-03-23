@@ -1,8 +1,8 @@
 import { type Level } from 'level'
-import type { Database, DatabaseItemType } from '@jhasuraj01/interface'
+import type { IDatabase, IDatabaseItemType } from '@jhasuraj01/interface'
 import { serialize, deserialize } from '@jhasuraj01/utils'
 
-export class Storage<T extends DatabaseItemType> implements Database<T> {
+export class Storage<T extends IDatabaseItemType> implements IDatabase<T> {
   private readonly db
 
   constructor(

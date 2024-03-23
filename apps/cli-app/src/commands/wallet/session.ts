@@ -1,8 +1,8 @@
-import { connect } from '@jhasuraj01/walletconnect'
+import { getSession } from '@jhasuraj01/walletconnect'
 import { Command } from '@oclif/core'
 
 export default class ConnectGraph extends Command {
-  static override aliases = ['connect:wallet']
+  static override aliases = ['session:wallet']
 
   static override description = 'Connect Wallet'
 
@@ -11,8 +11,13 @@ export default class ConnectGraph extends Command {
   ]
 
   public async run(): Promise<void> {
-    const session = await connect();
-    this.logJson(session);
+    const session = await getSession();
+    if(session) {
+      this.logJson(session);
+    }
+    else {
+      this.log('No session found');
+    }
     process.exit(0);
   }
 }
