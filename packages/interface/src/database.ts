@@ -12,7 +12,7 @@ export interface IDatabase<T extends IDatabaseItemType> {
 
 export interface IKeyValueStorage<T extends any> {
   getKeys: () => Promise<string[]>;
-  getEntries: () => Promise<[string, T][]>;
+  getEntries: () => Promise<Array<[string, T]>>;
   getItem: (key: string) => Promise<T | undefined>;
   setItem: (key: string, value: T) => Promise<void>;
   removeItem: (key: string) => Promise<void>;

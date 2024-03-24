@@ -6,13 +6,11 @@ export default class ConnectGraph extends Command {
 
   static override description = 'Connect Wallet'
 
-  static override examples = [
-    '<%= config.bin %> <%= command.id %>',
-  ]
+  static override examples = ['<%= config.bin %> <%= command.id %>']
 
   public async run(): Promise<void> {
-    const session = await connect();
-    this.logJson(session);
-    process.exit(0);
+    const provider = await connect()
+    this.logJson(provider.session)
+    process.exit(0)
   }
 }

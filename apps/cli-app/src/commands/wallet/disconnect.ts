@@ -6,12 +6,10 @@ export default class DisconnectWallet extends Command {
 
   static override description = 'Disconnect Wallet'
 
-  static override examples = [
-    '<%= config.bin %> <%= command.id %>',
-  ]
+  static override examples = ['<%= config.bin %> <%= command.id %>']
 
   public async run(): Promise<void> {
-    await disconnect();
-    process.exit(0);
+    await disconnect()
+    process.exit(0)
   }
 }
