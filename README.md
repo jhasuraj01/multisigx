@@ -5,6 +5,10 @@
 pnpm i
 ```
 
+## NX Cloud Integration
+Create `nx-cloud.env` and add `NX_CLOUD_ACCESS_TOKEN` with read-write access for remote cache.
+Refer `nx-cloud.env.example`
+
 To add a dependency to all packages in your workspace using **pnpm**, you can use the following command:
 
 ```bash
