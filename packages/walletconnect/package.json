@@ -1,8 +1,8 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
-  "name": "@jhasuraj01/speak",
+  "name": "@jhasuraj01/walletconnect",
   "version": "0.0.0",
-  "description": "Speaker speaks speech",
+  "description": "walletconnect provider to work across web and cli",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -24,18 +24,29 @@
     "format:check": "prettier ./src/**/* --check",
     "build": "tsup",
     "dev": "tsup --watch",
-    "clear": "rimraf dist",
-    "clear:all": "rimraf dist node_modules",
-    "typecheck:src": "tsc -p ./tsconfig.json --noEmit"
+    "clear": "rimraf coverage dist",
+    "clear:all": "rimraf coverage dist node_modules",
+    "test": "vitest run --coverage",
+    "test:dev": "vitest dev",
+    "typecheck:src": "tsc -p ./tsconfig.json --noEmit",
+    "typecheck:test": "tsc -p ./test/tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@jhasuraj01/database": "workspace:*",
+    "@types/qrcode": "^1.5.5",
+    "@walletconnect/universal-provider": "^2.11.3",
+    "qrcode": "^1.5.3"
   },
   "devDependencies": {
     "@jhasuraj01/eslint-config": "workspace:*",
     "@jhasuraj01/prettier-config": "workspace:*",
     "@jhasuraj01/tsconfig": "workspace:*",
     "@jhasuraj01/tsup": "workspace:*",
+    "@vitest/coverage-v8": "^1.4.0",
     "rimraf": "^5.0.5",
     "tsup": "^8.0.2",
-    "typescript": "^5.4.3"
+    "typescript": "^5.4.3",
+    "vitest": "^1.4.0"
   },
   "keywords": [],
   "author": {

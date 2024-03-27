@@ -18,5 +18,7 @@
   },
   "ignorePatterns": [ "node_modules/**", "dist/**", "bin/**", "build/**","**/tsconfig.*" ],
   "noInlineConfig": true,
-  "rules": {}
+  "rules": {
+    "@typescript-eslint/no-explicit-any": "off"
+  }
 }

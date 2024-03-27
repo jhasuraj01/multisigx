@@ -1,8 +1,8 @@
 import { type Level } from 'level'
-import type { Database, DatabaseItemType } from '@jhasuraj01/interface'
+import type { IDatabase, IDatabaseItemType } from '@jhasuraj01/interface'
 import { serialize, deserialize } from '@jhasuraj01/utils'
 
-export class Storage<T extends DatabaseItemType> implements Database<T> {
+export class Storage<T extends IDatabaseItemType> implements IDatabase<T> {
   private readonly db
 
   constructor(
@@ -30,5 +30,9 @@ export class Storage<T extends DatabaseItemType> implements Database<T> {
 
   async getAllIds(): Promise<Array<T['id']>> {
     return await this.db.keys().all()
+  }
+
+  async clear(): Promise<void> {
+    await this.db.clear()
   }
 }
