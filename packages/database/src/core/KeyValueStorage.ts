@@ -46,4 +46,8 @@ export class KeyValueStorage<T> implements IKeyValueStorage<T> {
   async getKeys(): Promise<string[]> {
     return await this.db.keys().all()
   }
+
+  async clear(): Promise<void> {
+    await this.db.clear()
+  }
 }

@@ -11,6 +11,6 @@ export default class ConnectGraph extends Command {
   public async run(): Promise<void> {
     const provider = await connect()
     this.logJson(provider.session)
-    process.exit(0)
+    this.exit(0)
   }
 }

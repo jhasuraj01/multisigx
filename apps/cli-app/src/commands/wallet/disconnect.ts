@@ -10,6 +10,6 @@ export default class DisconnectWallet extends Command {
 
   public async run(): Promise<void> {
     await disconnect()
-    process.exit(0)
+    this.exit(0)
   }
 }

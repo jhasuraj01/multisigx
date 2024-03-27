@@ -18,7 +18,7 @@ $ npm install -g @jhasuraj01/cli-app
 $ jhasuraj01-cli-app COMMAND
 running command...
 $ jhasuraj01-cli-app (--version)
-@jhasuraj01/cli-app/0.0.1 linux-x64 node-v20.11.0
+@jhasuraj01/cli-app/0.0.1 linux-x64 node-v20.12.0
 $ jhasuraj01-cli-app --help [COMMAND]
 USAGE
   $ jhasuraj01-cli-app COMMAND

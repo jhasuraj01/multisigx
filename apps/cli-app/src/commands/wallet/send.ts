@@ -25,15 +25,15 @@ export default class SendTransaction extends Command {
 
   public async run(): Promise<void> {
     const { flags } = await this.parse(SendTransaction)
-    const provider = await getProvider();
+    const provider = await getProvider()
     const web3 = new Web3(provider)
 
-    const accounts = await web3.eth.getAccounts();
+    const accounts = await web3.eth.getAccounts()
     this.logJson({ accounts })
 
-    if(accounts.length === 0) {
+    if (accounts.length === 0) {
       this.toErrorJson('No accounts found in the session')
-      process.exit(1)
+      this.exit(1)
     }
 
     this.log('Sending transaction')
@@ -43,11 +43,11 @@ export default class SendTransaction extends Command {
       from: accounts[0],
       gas: 30_000,
       to: flags.to,
-      value: web3.utils.toWei('0.00000000001', 'ether'),
-    });
+      value: web3.utils.toWei('0.00000000001', 'ether')
+    })
 
     this.logJson(oneWaySerialize(receipt))
 
-    process.exit(0)
+    this.exit(0)
   }
 }

@@ -6,7 +6,7 @@ export const serialize = (data: unknown): unknown => {
       return {
         __custom: true,
         __type: 'null',
-        __data: 'null',
+        __data: 'null'
       }
     }
     if (data instanceof Map) {
@@ -72,7 +72,7 @@ export const serialize = (data: unknown): unknown => {
   return {
     __custom: true,
     __type: 'undefined',
-    __data: 'undefined',
+    __data: 'undefined'
   }
 }
 

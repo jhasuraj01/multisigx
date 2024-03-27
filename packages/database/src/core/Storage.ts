@@ -31,4 +31,8 @@ export class Storage<T extends IDatabaseItemType> implements IDatabase<T> {
   async getAllIds(): Promise<Array<T['id']>> {
     return await this.db.keys().all()
   }
+
+  async clear(): Promise<void> {
+    await this.db.clear()
+  }
 }
