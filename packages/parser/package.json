@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json.schemastore.org/package.json",
+  "name": "@jhasuraj01/parser",
+  "version": "0.0.0",
+  "description": "composerer composers composeech",
+  "scripts": {
+    "preinstall": "npx only-allow pnpm",
+    "lint": "eslint ./scripts/**/* --ext .ts,js --fix",
+    "lint:check": "eslint ./scripts/**/* --ext .ts,js",
+    "format": "prettier ./scripts/**/* ./test/**/* --write",
+    "format:check": "prettier ./scripts/**/* ./test/**/* --check",
+    "clear": "rimraf artifacts cache",
+    "clear:all": "rimraf artifacts cache node_modules"
+  },
+
+  "devDependencies": {
+    "@jhasuraj01/eslint-config": "workspace:*",
+    "@jhasuraj01/prettier-config": "workspace:*",
+    "@nomicfoundation/hardhat-toolbox-viem": "^3.0.0",
+    "@nomiclabs/hardhat-ethers": "^2.2.3",
+    "@nomiclabs/hardhat-waffle": "^2.0.6",
+    "ethereum-waffle": "^4.0.10",
+    "ethers": "^5.7.2",
+    "hardhat": "^2.22.2",
+    "rimraf": "^5.0.5"
+  },
+  
+  "dependencies": {
+    "dotenv": "^16.4.5"
+  },
+  "contributors": [],
+  "license": "MIT",
+  "engines": {
+    "node": "20.12.0",
+    "pnpm": "8.15.5"
+  },
+  "engineStrict": true,
+  "packageManager": "pnpm@8.15.5",
+  "prettier": "@jhasuraj01/prettier-config",
+  "nx": {}
+}
