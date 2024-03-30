@@ -3,7 +3,11 @@ type KeyType = string | number | symbol
 export const serialize = (data: unknown): unknown => {
   if (typeof data === 'object') {
     if (data === null) {
-      return data
+      return {
+        __custom: true,
+        __type: 'null',
+        __data: 'null'
+      }
     }
     if (data instanceof Map) {
       return {
@@ -65,7 +69,11 @@ export const serialize = (data: unknown): unknown => {
     return data
   }
 
-  return undefined
+  return {
+    __custom: true,
+    __type: 'undefined',
+    __data: 'undefined'
+  }
 }
 
 export const oneWaySerialize = (data: unknown): unknown => {
@@ -115,11 +123,14 @@ export const oneWaySerialize = (data: unknown): unknown => {
 }
 
 export const deserialize = (data: unknown): unknown => {
-  if (typeof data === 'object') {
-    if (data === null) {
-      return data
-    }
+  if (typeof data === 'object' && data !== null) {
     if ('__custom' in data && '__type' in data && '__data' in data) {
+      if (data.__type === 'null') {
+        return null
+      }
+      if (data.__type === 'undefined') {
+        return undefined
+      }
       if (data.__type === 'Map' && Array.isArray(data.__data)) {
         return new Map(
           data.__data.map(([key, value]: [unknown, unknown]) => [
@@ -144,6 +155,7 @@ export const deserialize = (data: unknown): unknown => {
         return Symbol(data.__data)
       }
     }
+
     if (Array.isArray(data)) {
       return data.map(deserialize)
     }
@@ -156,5 +168,6 @@ export const deserialize = (data: unknown): unknown => {
     }
     return result
   }
+
   return data
 }
