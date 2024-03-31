@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json.schemastore.org/package.json",
+  "name": "@jhasuraj01/composer",
+  "version": "0.0.0",
+  "description": "composerer composers composeech",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "node": "./dist/index.cjs",
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.mjs",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "preinstall": "npx only-allow pnpm",
+    "lint": "eslint ./src/**/* --ext .ts,js --fix",
+    "lint:check": "eslint ./src/**/* --ext .ts,js",
+    "format": "prettier ./src/**/* --write",
+    "format:check": "prettier ./src/**/* --check",
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "clear": "rimraf coverage data dist",
+    "clear:all": "rimraf coverage data dist node_modules",
+    "test": "vitest run --coverage",
+    "test:dev": "vitest dev",
+    "typecheck:src": "tsc -p ./tsconfig.json --noEmit",
+    "typecheck:test": "tsc -p ./test/tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@jhasuraj01/interface": "workspace:*",
+    "unique-names-generator": "^4.7.1",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@jhasuraj01/eslint-config": "workspace:*",
+    "@jhasuraj01/prettier-config": "workspace:*",
+    "@jhasuraj01/tsconfig": "workspace:*",
+    "@jhasuraj01/tsup": "workspace:*",
+    "@types/uuid": "^9.0.8",
+    "@vitest/coverage-v8": "^1.4.0",
+    "rimraf": "^5.0.5",
+    "tsup": "^8.0.2",
+    "type-fest": "^4.14.0",
+    "typescript": "^5.4.3",
+    "vitest": "^1.4.0"
+  },
+  "keywords": [],
+  "author": {
+    "email": "contact@jhasuraj.com",
+    "name": "Suraj Jha",
+    "url": "https://jhasuraj.com"
+  },
+  "contributors": [],
+  "license": "MIT",
+  "engines": {
+    "node": "20.12.0",
+    "pnpm": "8.15.5"
+  },
+  "engineStrict": true,
+  "packageManager": "pnpm@8.15.5",
+  "prettier": "@jhasuraj01/prettier-config",
+  "nx": {}
+}
