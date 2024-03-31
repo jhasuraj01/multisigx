@@ -1,15 +1,16 @@
-import { type Level } from 'level'
+import { Level } from 'level'
 import type { IKeyValueStorage } from '@jhasuraj01/interface'
 import { serialize, deserialize } from '@jhasuraj01/utils'
+import { databasePrefix } from './constants'
 
 export class KeyValueStorage<T> implements IKeyValueStorage<T> {
   private readonly db
 
-  constructor(
-    db: Level,
-    readonly name: string
-  ) {
-    this.db = db.sublevel<string, T>(name, { valueEncoding: 'json' })
+  constructor(readonly name: string) {
+    this.db = new Level<string, T>(databasePrefix + name, {
+      valueEncoding: 'json',
+      version: 1
+    })
   }
 
   async setItem(key: string, value: T): Promise<void> {
