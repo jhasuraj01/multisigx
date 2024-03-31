@@ -302,6 +302,9 @@ importers:
       '@nomiclabs/hardhat-waffle':
         specifier: ^2.0.6
         version: 2.0.6(@nomiclabs/hardhat-ethers@2.2.3)(@types/sinon-chai@3.2.12)(ethereum-waffle@4.0.10)(ethers@5.7.2)(hardhat@2.22.2)
+      '@vitest/coverage-v8':
+        specifier: ^1.4.0
+        version: 1.4.0(vitest@1.4.0)
       ethereum-waffle:
         specifier: ^4.0.10
         version: 4.0.10(@ensdomains/ens@0.4.5)(@ensdomains/resolver@0.2.4)(@ethersproject/abi@5.7.0)(@ethersproject/providers@5.7.2)(ethers@5.7.2)(typescript@5.4.3)
@@ -314,6 +317,9 @@ importers:
       rimraf:
         specifier: ^5.0.5
         version: 5.0.5
+      vitest:
+        specifier: ^1.4.0
+        version: 1.4.0(@types/node@20.12.2)
 
   packages/prettier-config:
     devDependencies:
