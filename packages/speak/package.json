@@ -25,7 +25,8 @@
     "build": "tsup",
     "dev": "tsup --watch",
     "clear": "rimraf dist",
-    "clear:all": "rimraf dist node_modules"
+    "clear:all": "rimraf dist node_modules",
+    "typecheck:src": "tsc -p ./tsconfig.json --noEmit"
   },
   "devDependencies": {
     "@jhasuraj01/eslint-config": "workspace:*",
@@ -34,7 +35,7 @@
     "@jhasuraj01/tsup": "workspace:*",
     "rimraf": "^5.0.5",
     "tsup": "^8.0.2",
-    "typescript": "^5.3.3"
+    "typescript": "^5.4.3"
   },
   "keywords": [],
   "author": {
@@ -45,11 +46,11 @@
   "contributors": [],
   "license": "MIT",
   "engines": {
-    "node": "20.11.0",
-    "pnpm": "8.15.1"
+    "node": "20.12.0",
+    "pnpm": "8.15.5"
   },
   "engineStrict": true,
-  "packageManager": "pnpm@8.15.1",
+  "packageManager": "pnpm@8.15.5",
   "prettier": "@jhasuraj01/prettier-config",
   "nx": {}
 }
