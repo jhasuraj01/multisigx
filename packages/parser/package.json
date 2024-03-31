@@ -6,12 +6,13 @@
   "type": "module",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
+    "build": "hardhat compile",
     "lint": "eslint ./scripts/**/* --ext .ts,js --fix",
     "lint:check": "eslint ./scripts/**/* --ext .ts,js",
     "format": "prettier ./scripts/**/* ./test/**/* --write",
     "format:check": "prettier ./scripts/**/* ./test/**/* --check",
-    "clear": "rimraf artifacts cache",
-    "clear:all": "rimraf artifacts cache node_modules",
+    "clear": "rimraf artifacts cache coverage",
+    "clear:all": "rimraf artifacts cache node_modules coverage",
     "test": "vitest run --coverage",
     "test:dev": "vitest dev"
   },

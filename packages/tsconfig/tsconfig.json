@@ -39,7 +39,7 @@
     "declaration": true,
     "declarationMap": true,
 
-    // "skipLibCheck": true,
+    "skipLibCheck": true,
     "lib": [
       "ESNext",
       "DOM"
