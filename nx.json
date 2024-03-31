@@ -32,8 +32,6 @@
       "dependsOn": ["build"]
     }
   },
-  "affected": {
-    "defaultBase": "origin/main"
-  },
+  "defaultBase": "origin/main",
   "nxCloudAccessToken": "OTkxOWY1NjQtNGFkOS00MjFjLTkyNGUtNzZhNjcxYTQyNWM4fHJlYWQ="
 }
