@@ -1,5 +1,5 @@
 import { Storage, db } from '../src/core'
-import { describe, expect, expectTypeOf, test } from 'vitest'
+import { beforeAll, describe, expect, expectTypeOf, test } from 'vitest'
 
 const data = {
   id: '1',
@@ -14,9 +14,12 @@ const data = {
   }
 }
 
-const storage = new Storage<typeof data>(db, 'raw-storage')
-
 describe('storage Tests', () => {
+  let storage: Storage<typeof data>
+  beforeAll(() => {
+    storage = new Storage<typeof data>(db, 'raw-storage')
+  })
+
   test('should store a data', async () => {
     expectTypeOf(storage.writeOne(data)).resolves.toBeVoid()
     await expect(storage.writeOne(data)).resolves.toBeUndefined()
