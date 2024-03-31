@@ -91,8 +91,8 @@ importers:
         specifier: ^8.0.1
         version: 8.0.1
       oclif:
-        specifier: ^4.7.4
-        version: 4.7.4
+        specifier: ^4.7.5
+        version: 4.7.5
       ts-node:
         specifier: ^10.9.2
         version: 10.9.2(@types/node@20.12.2)(typescript@5.4.3)
@@ -7029,8 +7029,8 @@ packages:
       es-object-atoms: 1.0.0
     dev: true
 
-  /oclif@4.7.4:
-    resolution: {integrity: sha512-vXBbMWBhKak0csa4tiwdAagQ92guQp8vc1zPdg1axV4XJqzRSCDf3RTAxW2quFub8eFG3VqiB/jIiWf779VnWA==}
+  /oclif@4.7.5:
+    resolution: {integrity: sha512-bXxT81jGcr7lI3OzxDpcGTV9bkxwV5ZiikZsN05WrC/GKCqYPSYGb5M/u35bcyt9Ez860wtj5wNuOaCiL/pmow==}
     engines: {node: '>=18.0.0'}
     hasBin: true
     dependencies:
