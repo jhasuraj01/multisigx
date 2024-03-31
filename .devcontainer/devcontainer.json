@@ -10,5 +10,16 @@
         "juanblanco.solidity"
       ]
     }
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/node": {
+      "version": "20.12.0"
+    },
+    "ghcr.io/devcontainers-contrib/features/pnpm": {
+      "version": "8.15.5"
+    },
+    "ghcr.io/balazs23/devcontainers-features/nx": {
+      "version": "18.2.1"
+    }
   }
 }

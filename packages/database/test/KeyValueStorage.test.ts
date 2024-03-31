@@ -1,11 +1,21 @@
 import { KeyValueStorage, db } from '../src/core'
-import { afterEach, describe, expect, expectTypeOf, test } from 'vitest'
+import {
+  afterEach,
+  beforeAll,
+  describe,
+  expect,
+  expectTypeOf,
+  test
+} from 'vitest'
 
 describe('storage Tests', () => {
-  const storage = new KeyValueStorage<string | null | undefined | object>(
-    db,
-    'key-value-storage-test'
-  )
+  let storage: KeyValueStorage<string | null | undefined | object>
+  beforeAll(() => {
+    storage = new KeyValueStorage<string | null | undefined | object>(
+      db,
+      'key-value-storage-test'
+    )
+  })
 
   afterEach(async () => {
     await storage.clear()
