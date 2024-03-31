@@ -9,5 +9,16 @@
         "nrwl.angular-console"
       ]
     }
+  },
+  "features": {
+    "ghcr.io/devcontainers-contrib/features/pnpm": {
+      "version": "8.15.1"
+    },
+    "ghcr.io/devcontainers/features/node": {
+      "version": "20.11.0"
+    },
+    "ghcr.io/balazs23/devcontainers-features/nx": {
+      "version": "18.0.4"
+    }
   }
 }
