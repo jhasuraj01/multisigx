@@ -10,6 +10,7 @@ import {
 
 describe('storage Tests', () => {
   let storage: KeyValueStorage<string | null | undefined | object>
+
   beforeAll(() => {
     storage = new KeyValueStorage<string | null | undefined | object>(
       db,

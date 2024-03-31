@@ -16,6 +16,7 @@ const data = {
 
 describe('storage Tests', () => {
   let storage: Storage<typeof data>
+
   beforeAll(() => {
     storage = new Storage<typeof data>(db, 'raw-storage')
   })
