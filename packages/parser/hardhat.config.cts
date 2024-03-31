@@ -1,14 +1,14 @@
-import { HardhatUserConfig } from "hardhat/config";
-import "@nomicfoundation/hardhat-toolbox-viem";
+// import { HardhatUserConfig } from "hardhat/config";
+require("@nomicfoundation/hardhat-toolbox-viem");
 require("@nomiclabs/hardhat-waffle");
 require("dotenv").config();
 
 const { API_URL, PRIVATE_KEY } = process.env;
 
-const config: HardhatUserConfig = {
+const config = {
   solidity: "0.8.24",
 
-  defaultNetwork: "sepolia",
+  defaultNetwork: "hardhat",
 
   networks: {
     sepolia : {
@@ -18,4 +18,4 @@ const config: HardhatUserConfig = {
   }
 };
 
-export default config;
+module.exports = config;
