@@ -42,7 +42,7 @@ export const compile = (_graphObject: RuleGraphObject): RuleGraphCompiledObject 
     if(type === 'SIGN' || type === 'END') {
       internalLogicType = rule?.internalLogic?.type;
     }
-    let address: string = '';
+    let address: string = '0x0000000000000000000000000000000000000000';
     if(type === 'SIGN') {
       address = rule?.address;
     }
