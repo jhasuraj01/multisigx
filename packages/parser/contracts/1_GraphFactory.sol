@@ -12,7 +12,7 @@ contract GraphFactory {
     string[][] memory dependsOnArray,
     string[] memory types,
     string[] memory internalLogicArray,
-    string[] memory addressArray,
+    address[] memory addressArray,
     int[] memory thresholdArray
   ) public returns (address) {
     GraphContract graph = new GraphContract(
