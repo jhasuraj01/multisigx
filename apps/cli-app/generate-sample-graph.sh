@@ -22,6 +22,8 @@
 ./bin/run.js rule connect --from=s_3 --to=atleast_1 --graph=mygraph
 ./bin/run.js rule connect --from=s_4 --to=and_1 --graph=mygraph
 ./bin/run.js rule connect --from=s_5 --to=and_1 --graph=mygraph
+./bin/run.js rule connect --from=and_1 --to=atleast_1 --graph=mygraph
+./bin/run.js rule connect --from=or_1 --to=atleast_1 --graph=mygraph
 ./bin/run.js rule connect --from=atleast_1 --to=s_6 --graph=mygraph
 ./bin/run.js rule connect --from=atleast_1 --to=s_7 --graph=mygraph
 ./bin/run.js rule connect --from=s_6 --to=s_8 --graph=mygraph
