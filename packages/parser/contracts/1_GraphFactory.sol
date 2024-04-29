@@ -4,7 +4,6 @@ pragma solidity >=0.8.2 <0.9.0;
 import './2_GraphContract.sol';
 
 contract GraphFactory {
-  constructor() {}
   function build(
     string[] memory ids,
     string[] memory names,

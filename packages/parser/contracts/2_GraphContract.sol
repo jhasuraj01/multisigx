@@ -33,7 +33,7 @@ contract GraphContract {
   mapping(string => Node) internal graph;
   mapping(string => mapping(string => DynamicNodeData)) internal applications;
 
-  string[] internal ruleIds;
+  string[] ruleIds;
 
   constructor(
     string[] memory ids,
@@ -111,14 +111,14 @@ contract GraphContract {
     return ruleIds;
   }
 
-  function canApprove(
+  function canSign(
     string memory applicationId,
     string memory ruleId
   ) internal view returns (bool) {
     return applications[applicationId][ruleId].requiredApprovals <= 0;
   }
 
-  function canReject(
+  function canSuspend(
     string memory applicationId,
     string memory ruleId
   ) internal view returns (bool) {
@@ -135,7 +135,7 @@ contract GraphContract {
       graph[ruleId]._address == msg.sender,
       "Unauthorized to Sign."
     );
-    require(canApprove(applicationId, ruleId), "Cant sign yet");
+    require(canSign(applicationId, ruleId), "Cant sign yet");
     require(
       applications[applicationId][ruleId].nodeStatus == NodeStatus.PENDING,
       "Already signed/rejected"
@@ -186,10 +186,10 @@ contract GraphContract {
         if (
           keccak256(bytes(graph[currentRuleId].id)) == keccak256(bytes(ruleId))
         ) isApproved = true;
-        else if (canApprove(applicationId, currentRuleId))
+        else if (canSign(applicationId, currentRuleId))
           applications[applicationId][currentRuleId].nodeStatus = NodeStatus
             .PENDING;
-      } else isApproved = canApprove(applicationId, currentRuleId);
+      } else isApproved = canSign(applicationId, currentRuleId);
 
       if (!isApproved) continue;
 
@@ -201,7 +201,7 @@ contract GraphContract {
 
         applications[applicationId][nextRuleId].requiredApprovals--;
 
-        if (canApprove(applicationId, nextRuleId)) A[ai++] = nextRuleId;
+        if (canSign(applicationId, nextRuleId)) A[ai++] = nextRuleId;
       }
     }
   }
@@ -212,7 +212,8 @@ contract GraphContract {
       "Not a sign Rule"
     );
     require(graph[ruleId]._address == msg.sender, "Unauthorized to Reject");
-    require(canReject(applicationId, ruleId), "Cant Reject yet");
+    // require(canSign(applicationId, ruleId), "Cant Reject yet");
+    require(canSign(applicationId, ruleId), string(abi.encodePacked(applications[applicationId][ruleId].requiredRejections)));
     require(
       applications[applicationId][ruleId].nodeStatus == NodeStatus.PENDING,
       "Already signed/rejected"
@@ -258,12 +259,9 @@ contract GraphContract {
         isSuspended = true;
       else if (keccak256(bytes(ruleType)) == keccak256(bytes("SIGN"))) {
         if (
-          keccak256(bytes(graph[currentRuleId].id)) == keccak256(bytes(ruleId))
+          keccak256(bytes(graph[currentRuleId].id)) == keccak256(bytes(ruleId)) || canSuspend(applicationId, currentRuleId)
         ) isSuspended = true;
-        else if (canReject(applicationId, currentRuleId))
-          applications[applicationId][currentRuleId].nodeStatus = NodeStatus
-            .SUSPENDED;
-      } else isSuspended = canReject(applicationId, currentRuleId);
+      } else isSuspended = canSuspend(applicationId, currentRuleId);
 
       if (!isSuspended) continue;
 
@@ -279,7 +277,7 @@ contract GraphContract {
 
         applications[applicationId][nextRuleId].requiredRejections--;
 
-        if (canReject(applicationId, nextRuleId)) A[ai++] = nextRuleId;
+        if (canSuspend(applicationId, nextRuleId)) A[ai++] = nextRuleId;
       }
     }
   }
