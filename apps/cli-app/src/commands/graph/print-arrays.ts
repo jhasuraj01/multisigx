@@ -28,13 +28,41 @@ export default class PrintGraph extends Command {
         types
       } = compile(ruleGraphObject)
 
-      console.log(ids)
-      console.log(names)
-      console.log(dependentsArray)
-      console.log(dependsOnArray)
-      console.log(types)
-      console.log(internalLogicArray)
-      console.log(addressArray)
+      console.log('[' + ids.map((str) => JSON.stringify(str)).join(', ') + ']')
+      console.log(
+        '[' + names.map((str) => JSON.stringify(str)).join(', ') + ']'
+      )
+      console.log(
+        '[' +
+          dependentsArray
+            .map(
+              (row) =>
+                '[' + row.map((str) => JSON.stringify(str)).join(', ') + ']'
+            )
+            .join(', ') +
+          ']'
+      )
+      console.log(
+        '[' +
+          dependsOnArray
+            .map(
+              (row) =>
+                '[' + row.map((str) => JSON.stringify(str)).join(', ') + ']'
+            )
+            .join(', ') +
+          ']'
+      )
+      console.log(
+        '[' + types.map((str) => JSON.stringify(str)).join(', ') + ']'
+      )
+      console.log(
+        '[' +
+          internalLogicArray.map((str) => JSON.stringify(str)).join(', ') +
+          ']'
+      )
+      console.log(
+        '[' + addressArray.map((str) => JSON.stringify(str)).join(', ') + ']'
+      )
       console.log(thresholdArray)
     } catch (error) {
       if (error instanceof Error) {

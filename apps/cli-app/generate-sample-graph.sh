@@ -31,3 +31,6 @@
 ./bin/run.js rule connect --from=s_8 --to=end --graph=mygraph
 
 ./bin/run.js graph print mygraph > graph.tmp.json
+./bin/run.js graph print-arrays mygraph > mygraph.tmp.txt
+
+sed -i -e ':a' -e 'N' -e '$!ba' -e 's/[[:space:]\n]//g' "mygraph.tmp.txt"
