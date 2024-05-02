@@ -13,8 +13,8 @@
   "exports": "./dist/index.js",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "clear": "rimraf data dist tsconfig.tsbuildinfo",
-    "clear:all": "rimraf data dist tsconfig.tsbuildinfo node_modules",
+    "clear": "rimraf data dist tsconfig.tsbuildinfo *.tmp.*",
+    "clear:all": "rimraf data dist tsconfig.tsbuildinfo node_modules *.tmp.*",
     "build": "tsc -b",
     "postbuild": "chmod +x ./bin/run.js",
     "dev": "tsc --watch",
