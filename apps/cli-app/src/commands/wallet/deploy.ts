@@ -52,6 +52,52 @@ export default class DeploySmartContract extends Command {
     const contract = new web3.eth.Contract([
       {
         inputs: [],
+        stateMutability: 'nonpayable',
+        type: 'constructor'
+      },
+      {
+        inputs: [
+          {
+            internalType: 'string[]',
+            name: 'ids',
+            type: 'string[]'
+          },
+          {
+            internalType: 'string[]',
+            name: 'names',
+            type: 'string[]'
+          },
+          {
+            internalType: 'string[][]',
+            name: 'dependentsArray',
+            type: 'string[][]'
+          },
+          {
+            internalType: 'string[][]',
+            name: 'dependsOnArray',
+            type: 'string[][]'
+          },
+          {
+            internalType: 'string[]',
+            name: 'types',
+            type: 'string[]'
+          },
+          {
+            internalType: 'string[]',
+            name: 'internalLogicArray',
+            type: 'string[]'
+          },
+          {
+            internalType: 'string[]',
+            name: 'addressArray',
+            type: 'string[]'
+          },
+          {
+            internalType: 'int256[]',
+            name: 'thresholdArray',
+            type: 'int256[]'
+          }
+        ],
         name: 'build',
         outputs: [
           {
@@ -65,7 +111,8 @@ export default class DeploySmartContract extends Command {
       }
     ])
     // contract.options.address = '0x48EdD28C159AffbBe92322B1d4773a7Fb6118a55'
-    contract.options.address = '0x54f022cb1c205b43547f3A5FE31033A96Dc527D2'
+    // contract.options.address = '0x54f022cb1c205b43547f3A5FE31033A96Dc527D2'
+    contract.options.address = '0x81EC7e57E0a1E3Ff029C41F03a57A754d2f8Ac33'
 
     this.log('Sending transaction')
 

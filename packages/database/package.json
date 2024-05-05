@@ -41,12 +41,12 @@
     "@jhasuraj01/prettier-config": "workspace:*",
     "@jhasuraj01/tsconfig": "workspace:*",
     "@jhasuraj01/tsup": "workspace:*",
-    "@types/node": "^20.12.2",
-    "@vitest/coverage-v8": "^1.4.0",
+    "@types/node": "^20.12.7",
+    "@vitest/coverage-v8": "^1.5.2",
     "rimraf": "^5.0.5",
     "tsup": "^8.0.2",
-    "typescript": "^5.4.3",
-    "vitest": "^1.4.0"
+    "typescript": "^5.4.5",
+    "vitest": "^1.5.2"
   },
   "keywords": [],
   "author": {
