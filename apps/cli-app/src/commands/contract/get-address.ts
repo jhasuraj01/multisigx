@@ -30,7 +30,7 @@ export default class getDeployedContractAddress extends Command {
 
   static override flags = {
     txHash: Flags.string({
-      description: 'transaction hash of the contract deployment',
+      description: 'Transaction hash of the contract deployment',
       required: true
     })
   }
@@ -54,7 +54,9 @@ export default class getDeployedContractAddress extends Command {
         this.exit(1)
       }
 
-      console.log(data.result[0]?.contractAddress)
+      console.log(
+        'Contract Address: ' + (data.result[0]?.contractAddress ?? 'N/A')
+      )
     } catch (error) {
       if (error instanceof Error) {
         this.logToStderr(`${error.name}: ${error.message}`)
