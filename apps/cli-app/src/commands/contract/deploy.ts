@@ -8,11 +8,6 @@ import { Web3 } from 'web3'
 
 const factoryAbi = [
   {
-    inputs: [],
-    stateMutability: 'nonpayable',
-    type: 'constructor'
-  },
-  {
     inputs: [
       {
         internalType: 'string[]',
@@ -91,14 +86,14 @@ export default class DeployContract extends Command {
       )
 
       const {
-        addressArray,
+        ids,
+        names,
         dependentsArray,
         dependsOnArray,
-        ids,
+        types,
         internalLogicArray,
-        names,
-        thresholdArray,
-        types
+        addressArray,
+        thresholdArray
       } = compile(ruleGraph)
 
       const provider = await getProvider()
