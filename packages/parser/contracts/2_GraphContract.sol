@@ -212,8 +212,7 @@ contract GraphContract {
       "Not a sign Rule"
     );
     require(graph[ruleId]._address == msg.sender, "Unauthorized to Reject");
-    // require(canSign(applicationId, ruleId), "Cant Reject yet");
-    require(canSign(applicationId, ruleId), string(abi.encodePacked(applications[applicationId][ruleId].requiredRejections)));
+    require(canSign(applicationId, ruleId), "Cant Reject yet");
     require(
       applications[applicationId][ruleId].nodeStatus == NodeStatus.PENDING,
       "Already signed/rejected"
@@ -299,20 +298,9 @@ contract GraphContract {
       if (
         keccak256(bytes(graph[ruleIds[i]].logicType)) == keccak256(bytes("END"))
       ) {
-        return
-          string(
-            abi.encodePacked(
-              "WORKFLOW ",
-              convertEnumToString(
-                applications[applicationId][ruleIds[i]].nodeStatus
-              )
-            )
-          );
+        return convertEnumToString(applications[applicationId][ruleIds[i]].nodeStatus);
       }
     }
-    return
-      string(
-        abi.encodePacked("WORKFLOW ", convertEnumToString(NodeStatus.INACTIVE))
-      );
+    return convertEnumToString(NodeStatus.INACTIVE);
   }
 }
