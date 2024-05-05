@@ -216,6 +216,11 @@ export default class SignRuleId extends Command {
           '\n'
       )
 
+      await graphContract.methods['sign']?.(
+        flags.applicationId,
+        flags.ruleId
+      ).call()
+
       this.log('Authorize transaction from wallet ' + accounts[0] + '\n')
 
       const receipt = await graphContract.methods['sign']?.(
@@ -229,16 +234,15 @@ export default class SignRuleId extends Command {
 
       console.log(oneWaySerialize(receipt))
     } catch (error) {
-      console.log(error)
-      // if (error instanceof Error) {
-      //   this.logToStderr(`${error.name}: ${error.message}`)
-      // } else if (typeof error === 'string') {
-      //   this.logToStderr(error)
-      // } else {
-      //   throw error
-      // }
-    } finally {
-      this.exit(0)
+      if (error instanceof Error) {
+        this.logToStderr(`${error.name}: ${error.message}`)
+      } else if (typeof error === 'string') {
+        this.logToStderr(error)
+      } else {
+        throw error
+      }
     }
+
+    this.exit(0)
   }
 }
