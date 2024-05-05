@@ -95,22 +95,6 @@ contract GraphContract {
     return ans;
   }
 
-  function getGraph() internal view returns (Node[] memory) {
-    Node[] memory ans = new Node[](n);
-    for (uint i = 0; i < n; i++) {
-      ans[i] = graph[ruleIds[i]];
-    }
-    return ans;
-  }
-
-  function getNode(string memory ruleId) internal view returns (string memory) {
-    return graph[ruleId].logicType;
-  }
-
-  function getRuleIds() internal view returns (string[] memory) {
-    return ruleIds;
-  }
-
   function canSign(
     string memory applicationId,
     string memory ruleId
