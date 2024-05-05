@@ -216,6 +216,11 @@ export default class RejectRuleId extends Command {
           '\n'
       )
 
+      await graphContract.methods['reject']?.(
+        flags.applicationId,
+        flags.ruleId
+      ).call()
+
       this.log('Authorize transaction from wallet ' + accounts[0] + '\n')
 
       const receipt = await graphContract.methods['reject']?.(
