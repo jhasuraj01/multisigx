@@ -62,7 +62,7 @@ const factoryAbi = [
     type: 'function'
   }
 ]
-const factoryAddress = '0x913Dd12293B82b86e18449CddCED76AfC4354326'
+const factoryAddress = '0x41abE7a17CD2a27A2E203F5B7Cf3708FD9Bf28E8'
 
 export default class DeployContract extends Command {
   static override description = 'Deploy ruleGraph contract'
