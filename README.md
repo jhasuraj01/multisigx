@@ -1,4 +1,8 @@
-# Monorepo Template
+# MultiSigX: Multi-Signature Workflow using Directed Acyclic Rule Graph
+
+## System Architecture
+![multisigx-architecture](https://github.com/jhasuraj01/multisigx/assets/44930179/f62c401c-1acc-400c-b7fd-4756c24acd21)
+
 
 ## Installation
 ```bash
