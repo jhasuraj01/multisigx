@@ -1,5 +1,12 @@
-import { Storage, db } from '../src/core'
-import { beforeAll, describe, expect, expectTypeOf, test } from 'vitest'
+import { Storage } from '../src/core'
+import {
+  afterAll,
+  beforeAll,
+  describe,
+  expect,
+  expectTypeOf,
+  test
+} from 'vitest'
 
 const data = {
   id: '1',
@@ -16,8 +23,13 @@ const data = {
 
 describe('storage Tests', () => {
   let storage: Storage<typeof data>
+
   beforeAll(() => {
-    storage = new Storage<typeof data>(db, 'raw-storage')
+    storage = new Storage<typeof data>('raw-storage')
+  })
+
+  afterAll(async () => {
+    await storage.clear()
   })
 
   test('should store a data', async () => {

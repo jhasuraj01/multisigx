@@ -1,6 +1,7 @@
-import { KeyValueStorage, db } from '../src/core'
+import { KeyValueStorage } from '../src/core'
 import {
   afterEach,
+  afterAll,
   beforeAll,
   describe,
   expect,
@@ -10,14 +11,18 @@ import {
 
 describe('storage Tests', () => {
   let storage: KeyValueStorage<string | null | undefined | object>
+
   beforeAll(() => {
     storage = new KeyValueStorage<string | null | undefined | object>(
-      db,
       'key-value-storage-test'
     )
   })
 
   afterEach(async () => {
+    await storage.clear()
+  })
+
+  afterAll(async () => {
     await storage.clear()
   })
 

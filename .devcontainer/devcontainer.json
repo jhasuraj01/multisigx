@@ -6,7 +6,8 @@
       "extensions": [
         "github.copilot-chat",
         "github.vscode-pull-request-github",
-        "nrwl.angular-console"
+        "nrwl.angular-console",
+        "juanblanco.solidity"
       ]
     }
   },
